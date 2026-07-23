@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": 1784830326074,
+  "updatedAt": 1784830422690,
   "lastRemoteUpdatedAt": 0,
   "fontSize": 17,
   "menuWidth": 180,
@@ -8,8 +8,8 @@
   "languageX": 0,
   "languageY": 0,
   "languageControlSize": 180,
-  "paintButtonX": 85.1063829787234,
-  "paintButtonY": 0,
+  "paintButtonX": 63.22188449848024,
+  "paintButtonY": 47.682119205298015,
   "paintButtonSize": 200,
   "enabledLanguages": [
     "en",
