@@ -1,0 +1,106 @@
+{
+  "version": 2,
+  "updatedAt": 1784826347503,
+  "fontSize": 32,
+  "menuWidth": 180,
+  "language": "en",
+  "languageX": 0,
+  "languageY": 0,
+  "languageControlSize": 180,
+  "paintButtonX": 85.1063829787234,
+  "paintButtonY": 0,
+  "paintButtonSize": 200,
+  "enabledLanguages": [
+    "en",
+    "es",
+    "zh",
+    "hi",
+    "ar",
+    "fa",
+    "sw",
+    "am",
+    "ha",
+    "yo",
+    "zu"
+  ],
+  "links": [
+    {
+      "title": "TRACKING AND MANAGING DELIVERIES",
+      "url": "https://3y3jusvbs4t861dv.github.io/TRACKING__&__MANAGING__DELIVERIES.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    }
+  ],
+  "hiddenLinks": [
+    "https://unique-cow.staticdomains.app/TRACKING__AND__MANAGING__DELIVERIES.pdf"
+  ],
+  "renames": {},
+  "layout": {
+    "link-131rc7e": {
+      "x": 0,
+      "y": 400,
+      "w": 192
+    },
+    "link-1mwo08i": {
+      "x": 200,
+      "y": 400,
+      "w": 192
+    },
+    "link-1puwz9h": {
+      "x": 400,
+      "y": 400,
+      "w": 192
+    },
+    "link-5oxcq3": {
+      "x": 608,
+      "y": 400,
+      "w": 192
+    },
+    "link-1ff0p70": {
+      "x": 808,
+      "y": 400,
+      "w": 192
+    },
+    "link-esf4mf": {
+      "x": 1008,
+      "y": 400,
+      "w": 192
+    },
+    "link-1ix3vkm": {
+      "x": 1208,
+      "y": 400,
+      "w": 192
+    },
+    "link-1h5jqgo": {
+      "x": 0,
+      "y": 496,
+      "w": 192
+    },
+    "link-6d7kpt": {
+      "x": 400,
+      "y": 496,
+      "w": 192
+    },
+    "link-133qjql": {
+      "x": 608,
+      "y": 496,
+      "w": 192
+    },
+    "link-818upn": {
+      "x": 808,
+      "y": 496,
+      "w": 192
+    },
+    "link-1x3snzl": {
+      "x": 1008,
+      "y": 496,
+      "w": 192
+    },
+    "link-mm6gri": {
+      "x": 1008,
+      "y": 512,
+      "w": 192
+    }
+  },
+  "devCode": "0000"
+}
