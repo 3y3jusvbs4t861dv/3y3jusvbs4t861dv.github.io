@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "updatedAt": 1784827333422,
-  "fontSize": 17,
-  "menuWidth": 180,
+  "updatedAt": 1784828318929,
+  "fontSize": 21,
+  "menuWidth": 220,
   "language": "en",
   "languageX": 0,
   "languageY": 0,
-  "languageControlSize": 180,
-  "paintButtonX": 85.1063829787234,
+  "languageControlSize": 60,
+  "paintButtonX": 83.76068376068376,
   "paintButtonY": 0,
-  "paintButtonSize": 200,
+  "paintButtonSize": 120,
   "enabledLanguages": [
     "en",
     "es",
@@ -25,91 +25,165 @@
   ],
   "links": [
     {
+      "title": "DELIVERY MANAGER",
+      "url": "https://3y3jusvbs4t861dv.github.io/DELIVERY__MANAGER.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "DOOR TAG",
+      "url": "https://3y3jusvbs4t861dv.github.io/DOOR_TAG.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "FEDEX PHONE NUMBER MENU",
+      "url": "https://3y3jusvbs4t861dv.github.io/FEDEX__PHONE__NUMBER__MENU.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "HOLD PACKAGE AT LOCATION",
+      "url": "https://3y3jusvbs4t861dv.github.io/HOLD__PACKAGE__AT__LOCATION.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "PHONE NUMBERS",
+      "url": "https://3y3jusvbs4t861dv.github.io/NUMBERS.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "PACKAGE DROPOFF",
+      "url": "https://3y3jusvbs4t861dv.github.io/PACKAGE__DROPOFF.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "PICKUP",
+      "url": "https://3y3jusvbs4t861dv.github.io/PICKUP.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "SIGNATURE & ID",
+      "url": "https://3y3jusvbs4t861dv.github.io/SIGNATURE__AND__ID.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "SMALL BUSINESS SUPPORT NUMBER",
+      "url": "https://3y3jusvbs4t861dv.github.io/SMALL__BUSINESS__SALES__SUPPORT.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "TEMPORARY HOLD PACKAGE",
+      "url": "https://3y3jusvbs4t861dv.github.io/TEMPORARY__HOLD__PACKAGE.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
       "title": "TRACKING AND MANAGING DELIVERIES",
       "url": "https://3y3jusvbs4t861dv.github.io/TRACKING__&__MANAGING__DELIVERIES.pdf",
       "type": "WEB",
       "group": "Custom"
     },
     {
-      "title": ".",
-      "url": "https://google.com/",
+      "title": "SMALL BUSINESS SUPPORT",
+      "url": "https://isell.my.site.com/s/schedule?language=en_US&PageSource=Small_bus_supp",
       "type": "WEB",
       "group": "Custom"
     }
   ],
-  "hiddenLinks": [
-    "https://unique-cow.staticdomains.app/TRACKING__AND__MANAGING__DELIVERIES.pdf"
-  ],
-  "renames": {},
+  "hiddenLinks": [],
+  "renames": {
+    "https://www.airnavradar.com/@37.75100,-97.82200,z5?airline=FDX": "FEDEX FLIGHTS",
+    "https://www.fedex.com/shippingplus/en-us/guest/pickup/schedule-pickup": "SCHEDULE PICKUP",
+    "https://3y3jusvbs4t861dv.github.io/NUMBERS.pdf": "PHONE NUMBERS",
+    "https://www.fedex.com/en-us/customer-support/faqs.html": "FAQS",
+    "https://3y3jusvbs4t861dv.github.io/SMALL__BUSINESS__SALES__SUPPORT.pdf": "SMALL BUSINESS SUPPORT NUMBER"
+  },
   "layout": {
-    "link-131rc7e": {
-      "x": 0,
-      "y": 400,
-      "w": 192
-    },
-    "link-1mwo08i": {
-      "x": 200,
-      "y": 400,
-      "w": 192
-    },
-    "link-1puwz9h": {
-      "x": 400,
-      "y": 400,
-      "w": 192
-    },
-    "link-5oxcq3": {
-      "x": 608,
-      "y": 400,
-      "w": 192
-    },
-    "link-1ff0p70": {
-      "x": 808,
-      "y": 400,
-      "w": 192
-    },
-    "link-esf4mf": {
-      "x": 1008,
-      "y": 400,
-      "w": 192
-    },
-    "link-1ix3vkm": {
-      "x": 1208,
-      "y": 400,
-      "w": 192
-    },
-    "link-1h5jqgo": {
-      "x": 0,
-      "y": 496,
-      "w": 192
-    },
     "link-6d7kpt": {
       "x": 400,
-      "y": 496,
+      "y": 504,
       "w": 192
     },
     "link-133qjql": {
       "x": 608,
-      "y": 496,
+      "y": 504,
       "w": 192
     },
     "link-818upn": {
       "x": 808,
-      "y": 496,
+      "y": 504,
       "w": 192
     },
     "link-1x3snzl": {
       "x": 1008,
-      "y": 496,
+      "y": 504,
       "w": 192
     },
-    "link-mm6gri": {
-      "x": 1224,
-      "y": 512,
+    "link-l7ew50": {
+      "x": 776,
+      "y": 400,
       "w": 192
     },
-    "link-1su0lqf": {
+    "link-h3xfyo": {
+      "x": 1024,
+      "y": 384,
+      "w": 192
+    },
+    "link-pd4sad": {
       "x": 1208,
-      "y": 464,
+      "y": 456,
+      "w": 192
+    },
+    "link-144nyou": {
+      "x": 0,
+      "y": 520,
+      "w": 192
+    },
+    "link-ie755n": {
+      "x": 200,
+      "y": 560,
+      "w": 192
+    },
+    "link-lhp19n": {
+      "x": 400,
+      "y": 408,
+      "w": 192
+    },
+    "link-1f20vib": {
+      "x": 568,
+      "y": 328,
+      "w": 192
+    },
+    "link-1wo8mg1": {
+      "x": 848,
+      "y": 280,
+      "w": 192
+    },
+    "link-10k8xe5": {
+      "x": 1056,
+      "y": 224,
+      "w": 192
+    },
+    "link-1l5qrqp": {
+      "x": 1208,
+      "y": 560,
+      "w": 192
+    },
+    "link-167i2pt": {
+      "x": 96,
+      "y": 376,
+      "w": 192
+    },
+    "link-1fg3g5f": {
+      "x": 424,
+      "y": 584,
       "w": 192
     }
   },
