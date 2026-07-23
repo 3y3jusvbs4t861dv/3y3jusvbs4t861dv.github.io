@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "updatedAt": 1784826347503,
-  "fontSize": 32,
+  "updatedAt": 1784827333422,
+  "fontSize": 17,
   "menuWidth": 180,
   "language": "en",
   "languageX": 0,
@@ -27,6 +27,12 @@
     {
       "title": "TRACKING AND MANAGING DELIVERIES",
       "url": "https://3y3jusvbs4t861dv.github.io/TRACKING__&__MANAGING__DELIVERIES.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": ".",
+      "url": "https://google.com/",
       "type": "WEB",
       "group": "Custom"
     }
@@ -97,8 +103,13 @@
       "w": 192
     },
     "link-mm6gri": {
-      "x": 1008,
+      "x": 1224,
       "y": 512,
+      "w": 192
+    },
+    "link-1su0lqf": {
+      "x": 1208,
+      "y": 464,
       "w": 192
     }
   },
