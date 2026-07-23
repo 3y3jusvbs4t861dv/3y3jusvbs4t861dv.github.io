@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "updatedAt": 1784835069404,
-  "lastRemoteUpdatedAt": 1784834789889,
-  "lastRemoteSignature": "1449:d51a95e1",
+  "updatedAt": 1784837704499,
+  "lastRemoteUpdatedAt": 1784835069404,
+  "lastRemoteSignature": "1434:630eaf23",
   "fontSize": 17,
   "menuWidth": 180,
   "language": "en",
@@ -31,12 +31,20 @@
       "url": "https://3y3jusvbs4t861dv.github.io/TRACKING__&__MANAGING__DELIVERIES.pdf",
       "type": "WEB",
       "group": "Custom"
+    },
+    {
+      "title": ".",
+      "url": "https://google.com/",
+      "type": "WEB",
+      "group": "Custom"
     }
   ],
   "hiddenLinks": [
     "https://unique-cow.staticdomains.app/TRACKING__AND__MANAGING__DELIVERIES.pdf"
   ],
-  "renames": {},
+  "renames": {
+    "https://3y3jusvbs4t861dv.github.io/TEMPORARY__HOLD__PACKAGE.pdf": "TEMPORARY HOLD PACKAGE"
+  },
   "layout": {
     "link-131rc7e": {
       "x": 0,
@@ -141,6 +149,11 @@
     "link-1f20vib": {
       "x": 0,
       "y": 104,
+      "w": 192
+    },
+    "link-1su0lqf": {
+      "x": 1208,
+      "y": 464,
       "w": 192
     }
   },
