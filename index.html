@@ -322,7 +322,7 @@ try{
 }catch(_){}
 const pendingLinkTitleTranslations=new Map();
 const browserTitleTranslators=new Map();
-const unavailableTitleTranslationLanguages=new Set();
+const failedLinkTitleTranslationTimes=new Map();
 
 function normalizeEnglishTitleKey(value){
   return String(value||"")
@@ -369,34 +369,69 @@ function linkTitleTranslationCacheId(englishTitle,targetLanguage){
   return `${targetLanguage}|${normalizeEnglishTitleKey(englishTitle)}`;
 }
 
-async function browserTranslateLinkTitle(englishTitle,targetLanguage){
-  const TranslatorApi=globalThis.Translator;
-  if(!TranslatorApi||typeof TranslatorApi.create!=="function")throw new Error("TRANSLATOR UNAVAILABLE");
-  let translator=browserTitleTranslators.get(targetLanguage);
-  if(!translator){
-    if(typeof TranslatorApi.availability==="function"){
-      const availability=await TranslatorApi.availability({sourceLanguage:"en",targetLanguage});
-      if(String(availability).toLowerCase()==="unavailable")throw new Error("TRANSLATOR UNAVAILABLE");
-    }
-    translator=await TranslatorApi.create({sourceLanguage:"en",targetLanguage});
-    browserTitleTranslators.set(targetLanguage,translator);
+async function remoteTranslateLinkTitle(englishTitle,targetLanguage){
+  const source=String(englishTitle||"").trim();
+  if(!source)return "";
+  const target=targetLanguage==="zh"?"zh-CN":String(targetLanguage||"");
+  const controller=typeof AbortController==="function"?new AbortController():null;
+  const timeout=controller?setTimeout(()=>controller.abort(),9000):0;
+  try{
+    const endpoint="https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl="+
+      encodeURIComponent(target)+"&dt=t&q="+encodeURIComponent(source);
+    const response=await fetch(endpoint,{
+      method:"GET",
+      cache:"no-store",
+      signal:controller?controller.signal:undefined
+    });
+    if(!response.ok)throw new Error("REMOTE TRANSLATION FAILED");
+    const data=await response.json();
+    const translated=Array.isArray(data&&data[0])
+      ?data[0].map(part=>Array.isArray(part)?String(part[0]||""):"").join("").trim()
+      :"";
+    if(!translated)throw new Error("EMPTY TRANSLATION");
+    return translated;
+  }finally{
+    if(timeout)clearTimeout(timeout);
   }
-  const translated=await translator.translate(String(englishTitle||""));
-  return String(translated||"").trim();
+}
+
+async function browserTranslateLinkTitle(englishTitle,targetLanguage){
+  const source=String(englishTitle||"").trim();
+  if(!source)return "";
+  const TranslatorApi=globalThis.Translator;
+  if(TranslatorApi&&typeof TranslatorApi.create==="function"){
+    try{
+      let translator=browserTitleTranslators.get(targetLanguage);
+      if(!translator){
+        if(typeof TranslatorApi.availability==="function"){
+          const availability=await TranslatorApi.availability({sourceLanguage:"en",targetLanguage});
+          if(String(availability).toLowerCase()==="unavailable")throw new Error("TRANSLATOR UNAVAILABLE");
+        }
+        translator=await TranslatorApi.create({sourceLanguage:"en",targetLanguage});
+        browserTitleTranslators.set(targetLanguage,translator);
+      }
+      const translated=String(await translator.translate(source)||"").trim();
+      if(translated)return translated;
+    }catch(_){}
+  }
+  return remoteTranslateLinkTitle(source,targetLanguage);
 }
 
 function queueEditedLinkTitleTranslation(englishTitle,targetLanguage){
-  if(!englishTitle||targetLanguage==="en"||unavailableTitleTranslationLanguages.has(targetLanguage))return;
+  if(!englishTitle||targetLanguage==="en")return;
   const id=linkTitleTranslationCacheId(englishTitle,targetLanguage);
   if(cachedLinkTitleTranslations[id]||pendingLinkTitleTranslations.has(id))return;
+  const failedAt=Number(failedLinkTitleTranslationTimes.get(id)||0);
+  if(failedAt&&Date.now()-failedAt<30000)return;
   const pending=browserTranslateLinkTitle(englishTitle,targetLanguage)
     .then(translated=>{
       if(!translated)return;
+      failedLinkTitleTranslationTimes.delete(id);
       cachedLinkTitleTranslations[id]=translated;
       try{localStorage.setItem(LINK_TITLE_TRANSLATION_CACHE_KEY,JSON.stringify(cachedLinkTitleTranslations));}catch(_){}
       if(language===targetLanguage)render();
     })
-    .catch(()=>{unavailableTitleTranslationLanguages.add(targetLanguage);})
+    .catch(()=>{failedLinkTitleTranslationTimes.set(id,Date.now());})
     .finally(()=>pendingLinkTitleTranslations.delete(id));
   pendingLinkTitleTranslations.set(id,pending);
 }
