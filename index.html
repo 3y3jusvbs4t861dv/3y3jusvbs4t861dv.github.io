@@ -2798,9 +2798,22 @@ function openAddLinkModal(){
   setTimeout(()=>addLinkName.focus(),0);
 }
 
+function completeAddLinkUrl(value){
+  const normalized=normalizeUrl(value);
+  if(!normalized)return "";
+  try{
+    const parsed=new URL(normalized);
+    const hostname=parsed.hostname;
+    const completeHostname=hostname==="localhost"||hostname.includes(".")||/^\d{1,3}(?:\.\d{1,3}){3}$/.test(hostname)||hostname.includes(":");
+    return /^(https?:)$/.test(parsed.protocol)&&completeHostname?parsed.href:"";
+  }catch(_){
+    return "";
+  }
+}
+
 function commitNewLink(showErrors=true){
   const title=addLinkName.value.trim().toUpperCase();
-  const url=normalizeUrl(addLinkUrl.value);
+  const url=completeAddLinkUrl(addLinkUrl.value);
   if(!title){
     if(showErrors){showToast("NAME REQUIRED");addLinkName.focus();}
     return false;
@@ -2822,8 +2835,10 @@ function commitNewLink(showErrors=true){
 
 function closeAddLinkModal(save=true){
   if(!addLinkModal)return true;
-  const hasContent=Boolean(addLinkName.value.trim()||addLinkUrl.value.trim());
-  if(save&&hasContent&&!commitNewLink(true))return false;
+  const title=addLinkName.value.trim();
+  const url=completeAddLinkUrl(addLinkUrl.value);
+  const complete=Boolean(title&&url);
+  if(save&&complete)commitNewLink(false);
   addLinkModal.classList.remove("open");
   addLinkName.value="";
   addLinkUrl.value="";
@@ -3743,9 +3758,9 @@ if(addLinkButton){
 
 if(addLinkModal){
   addLinkModal.addEventListener("click",event=>{
-    if(event.target===addLinkModal){
-      closeAddLinkModal(true);
-    }
+    const target=event.target instanceof Element?event.target:null;
+    if(!target||target.closest(".add-link-name,.add-link-url"))return;
+    closeAddLinkModal(true);
   });
 }
 
