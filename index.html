@@ -30,8 +30,6 @@ body.paint-launcher-drag-mode .paint-launch-button{pointer-events:none!important
 .paint-tool-word,.paint-tool-word{display:inline-block;min-width:0;line-height:.94;text-align:center;white-space:nowrap}
 .paint-tool-button.active,.paint-tool-button.paint-inverse-flash{color:#ff6600!important;background:#660099!important}
 .paint-tool-button.paint-green-flash{color:#660099!important;background:#01cc00!important}
-.paint-tool-drag-source{visibility:hidden!important;pointer-events:none!important;animation:none!important;transition:none!important}.paint-tool-drag-ghost{position:fixed!important;z-index:10080!important;margin:0!important;opacity:.96!important;pointer-events:none!important;outline:0!important;box-shadow:0 0 0 2px #660099!important;cursor:grabbing!important;animation:none!important;transition:none!important;will-change:transform}
-body.paint-tool-drag-active{cursor:grabbing!important;user-select:none!important}
 .paint-tool-field-label{display:flex;min-width:0;align-items:center;justify-content:center;line-height:.95;text-align:center;white-space:nowrap;overflow:hidden}
 .paint-color-square-control{display:grid;grid-template-columns:minmax(0,1fr) 24%;grid-template-rows:1fr;column-gap:4px;align-items:stretch;justify-items:stretch;padding:0 0 0 4px}.paint-color-square-control .paint-tool-field-label,.paint-brush-square-control .paint-tool-field-label{width:100%;height:100%;min-width:0;min-height:0;overflow:visible}.paint-color-square-control .paint-tool-field-label{justify-content:center}.paint-brush-square-control .paint-tool-field-label{justify-content:flex-start}
 .paint-color-preview{display:block;width:100%;height:100%;min-width:12px;min-height:0;align-self:stretch;margin:0;padding:0;border:0;outline:0;box-shadow:none;background:#fff;overflow:hidden}
@@ -288,6 +286,19 @@ const LANGUAGE_NAMES={"en":"ENGLISH","es":"ESPAÑOL","zh":"中文","hi":"हि�
 const SUPPORTED_LANGUAGES=["en", "es", "zh", "hi", "ar", "fa", "sw", "am", "ha", "yo", "zu"];
 const RTL_LANGUAGES=new Set(["ar", "fa"]);
 const LINK_I18N={"en":{"temporaryHold":"Temporary Hold Package","phoneMenu":"1-800-GoFedEx Phone Menu","deliveryManager":"FedEx Delivery Manager","doorTagHelp":"Door Tag Help","packageDropoff":"Package Drop-Off","holdAtLocation":"Hold Package at Location","signatureId":"Signature and ID","scheduleRequestPickup":"Schedule / Request Pickup","trackingManaging":"Tracking and Managing Deliveries","airNavFlights":"AirNav Radar - FedEx Flights","findLocations":"Find FedEx Locations","schedulePickup":"Schedule a FedEx Pickup","supportFaqs":"FedEx Customer Support FAQs"},"es":{"temporaryHold":"Retención temporal del paquete","phoneMenu":"Menú telefónico 1-800-GoFedEx","deliveryManager":"Administrador de entregas FedEx","doorTagHelp":"Ayuda con etiqueta de puerta","packageDropoff":"Entrega de paquetes","holdAtLocation":"Retener paquete en una ubicación","signatureId":"Firma e identificación","scheduleRequestPickup":"Programar / solicitar recolección","trackingManaging":"Rastreo y gestión de entregas","airNavFlights":"Radar AirNav - Vuelos de FedEx","findLocations":"Buscar ubicaciones de FedEx","schedulePickup":"Programar una recolección de FedEx","supportFaqs":"Preguntas frecuentes de atención al cliente de FedEx"},"zh":{"temporaryHold":"临时保留包裹","phoneMenu":"1-800-GoFedEx 电话菜单","deliveryManager":"FedEx 配送管理器","doorTagHelp":"门牌标签帮助","packageDropoff":"包裹投递","holdAtLocation":"在指定地点保留包裹","signatureId":"签名和身份证件","scheduleRequestPickup":"安排 / 请求取件","trackingManaging":"追踪和管理配送","airNavFlights":"AirNav 雷达 - FedEx 航班","findLocations":"查找 FedEx 网点","schedulePickup":"安排 FedEx 取件","supportFaqs":"FedEx 客户支持常见问题"},"hi":{"temporaryHold":"पैकेज को अस्थायी रूप से रोकें","phoneMenu":"1-800-GoFedEx फ़ोन मेनू","deliveryManager":"FedEx डिलीवरी मैनेजर","doorTagHelp":"डोर टैग सहायता","packageDropoff":"पैकेज जमा करें","holdAtLocation":"पैकेज को स्थान पर रोकें","signatureId":"हस्ताक्षर और पहचान पत्र","scheduleRequestPickup":"पिकअप निर्धारित / अनुरोध करें","trackingManaging":"डिलीवरी ट्रैक और प्रबंधित करें","airNavFlights":"AirNav रडार - FedEx उड़ानें","findLocations":"FedEx स्थान खोजें","schedulePickup":"FedEx पिकअप निर्धारित करें","supportFaqs":"FedEx ग्राहक सहायता सामान्य प्रश्न"},"ar":{"temporaryHold":"تعليق الطرد مؤقتًا","phoneMenu":"قائمة هاتف 1-800-GoFedEx","deliveryManager":"مدير تسليم FedEx","doorTagHelp":"مساعدة بطاقة الباب","packageDropoff":"تسليم الطرود","holdAtLocation":"الاحتفاظ بالطرد في موقع","signatureId":"التوقيع وإثبات الهوية","scheduleRequestPickup":"جدولة / طلب استلام","trackingManaging":"تتبع عمليات التسليم وإدارتها","airNavFlights":"رادار AirNav - رحلات FedEx","findLocations":"العثور على مواقع FedEx","schedulePickup":"جدولة استلام FedEx","supportFaqs":"الأسئلة الشائعة لدعم عملاء FedEx"},"fa":{"temporaryHold":"توقف موقت بسته","phoneMenu":"منوی تلفنی 1-800-GoFedEx","deliveryManager":"مدیریت تحویل FedEx","doorTagHelp":"راهنمای برچسب در","packageDropoff":"تحویل بسته","holdAtLocation":"نگهداری بسته در محل","signatureId":"امضا و مدرک شناسایی","scheduleRequestPickup":"زمان‌بندی / درخواست دریافت","trackingManaging":"رهگیری و مدیریت تحویل‌ها","airNavFlights":"رادار AirNav - پروازهای FedEx","findLocations":"یافتن مراکز FedEx","schedulePickup":"زمان‌بندی دریافت FedEx","supportFaqs":"پرسش‌های متداول پشتیبانی FedEx"},"sw":{"temporaryHold":"Shikilia kifurushi kwa muda","phoneMenu":"Menyu ya simu ya 1-800-GoFedEx","deliveryManager":"Msimamizi wa uwasilishaji wa FedEx","doorTagHelp":"Msaada wa lebo ya mlangoni","packageDropoff":"Kuwasilisha kifurushi","holdAtLocation":"Shikilia kifurushi mahali","signatureId":"Sahihi na kitambulisho","scheduleRequestPickup":"Panga / omba uchukuaji","trackingManaging":"Fuatilia na udhibiti uwasilishaji","airNavFlights":"Rada ya AirNav - Ndege za FedEx","findLocations":"Tafuta maeneo ya FedEx","schedulePickup":"Panga uchukuaji wa FedEx","supportFaqs":"Maswali ya mara kwa mara ya msaada wa FedEx"},"am":{"temporaryHold":"ጥቅሉን ለጊዜው ያቆዩ","phoneMenu":"1-800-GoFedEx የስልክ ምናሌ","deliveryManager":"FedEx የማድረሻ አስተዳዳሪ","doorTagHelp":"የበር መለያ እገዛ","packageDropoff":"ጥቅል ማስረከቢያ","holdAtLocation":"ጥቅሉን በቦታ ያቆዩ","signatureId":"ፊርማ እና መታወቂያ","scheduleRequestPickup":"መውሰጃ ያቅዱ / ይጠይቁ","trackingManaging":"መላኪያዎችን ይከታተሉ እና ያስተዳድሩ","airNavFlights":"AirNav ራዳር - FedEx በረራዎች","findLocations":"የFedEx ቦታዎችን ያግኙ","schedulePickup":"የFedEx መውሰጃ ያቅዱ","supportFaqs":"የFedEx ደንበኛ ድጋፍ ተደጋጋሚ ጥያቄዎች"},"ha":{"temporaryHold":"Riƙe kunshin na ɗan lokaci","phoneMenu":"Jerin wayar 1-800-GoFedEx","deliveryManager":"Mai kula da isarwa na FedEx","doorTagHelp":"Taimakon alamar ƙofa","packageDropoff":"Ajiye kunshi","holdAtLocation":"Riƙe kunshi a wuri","signatureId":"Sa hannu da shaidar zama","scheduleRequestPickup":"Tsara / nemi ɗauka","trackingManaging":"Bibiyar da sarrafa isarwa","airNavFlights":"Radar AirNav - Jiragen FedEx","findLocations":"Nemo wuraren FedEx","schedulePickup":"Tsara ɗaukar FedEx","supportFaqs":"Tambayoyin da ake yawan yi na tallafin FedEx"},"yo":{"temporaryHold":"Dádúró àpò fún ìgbà díẹ̀","phoneMenu":"Àkójọ fóònù 1-800-GoFedEx","deliveryManager":"Olùṣàkóso ìfijiṣẹ FedEx","doorTagHelp":"Ìrànlọ́wọ́ àmì ilẹ̀kùn","packageDropoff":"Fí àpò sílẹ̀","holdAtLocation":"Dádúró àpò ní ibi kan","signatureId":"Ìbuwọ́lu àti ìdánimọ̀","scheduleRequestPickup":"Ṣètò / béèrè gbígbé","trackingManaging":"Tọpinpin àti ṣàkóso ìfijiṣẹ","airNavFlights":"Rádà AirNav - Ọkọ̀ òfurufú FedEx","findLocations":"Wá àwọn ibi FedEx","schedulePickup":"Ṣètò gbígbé FedEx","supportFaqs":"Àwọn ìbéèrè tí a máa ń béèrè nípa àtìlẹ́yìn FedEx"},"zu":{"temporaryHold":"Bamba iphakheji okwesikhashana","phoneMenu":"Imenyu yocingo ye-1-800-GoFedEx","deliveryManager":"Umphathi wokulethwa we-FedEx","doorTagHelp":"Usizo lwethegi yomnyango","packageDropoff":"Ukushiya iphakheji","holdAtLocation":"Bamba iphakheji endaweni","signatureId":"Isiginesha nomazisi","scheduleRequestPickup":"Hlela / cela ukulandwa","trackingManaging":"Landelela futhi uphathe ukulethwa","airNavFlights":"Iradar ye-AirNav - Izindiza ze-FedEx","findLocations":"Thola izindawo ze-FedEx","schedulePickup":"Hlela ukulandwa kwe-FedEx","supportFaqs":"Imibuzo evame ukubuzwa yosekelo lwe-FedEx"}};
+const PAINT_I18N={
+  "en":{"paint":"PAINT","select":"SELECT","draw":"DRAW","eraser":"ERASER","fill":"FILL","addImage":"ADD IMAGE","addLineShape":"ADD LINE SHAPE","color":"COLOR","brush":"BRUSH","undo":"UNDO","redo":"REDO","copy":"COPY","paste":"PASTE","clipboard":"CLIPBOARD","delete":"DELETE","clear":"CLEAR","addText":"ADD TEXT","sendText":"SEND TEXT","noCopiedObjects":"NO COPIED OBJECTS","textPlaceholder":"TEXT","object":"OBJECT","multiObject":"MULTI OBJECT","imageObject":"IMAGE","textObject":"TEXT","lineObject":"LINE","rectangleObject":"RECTANGLE","circleObject":"CIRCLE","triangleObject":"TRIANGLE","groupObject":"GROUP","paintEditor":"PAINT EDITOR","copiedObjects":"COPIED OBJECTS"},
+  "es":{"paint":"PINTAR","select":"SELECCIONAR","draw":"DIBUJAR","eraser":"BORRADOR","fill":"RELLENAR","addImage":"AÑADIR IMAGEN","addLineShape":"AÑADIR LÍNEA O FORMA","color":"COLOR","brush":"PINCEL","undo":"DESHACER","redo":"REHACER","copy":"COPIAR","paste":"PEGAR","clipboard":"PORTAPAPELES","delete":"ELIMINAR","clear":"LIMPIAR","addText":"AÑADIR TEXTO","sendText":"ENVIAR TEXTO","noCopiedObjects":"NO HAY OBJETOS COPIADOS","textPlaceholder":"TEXTO","object":"OBJETO","multiObject":"VARIOS OBJETOS","imageObject":"IMAGEN","textObject":"TEXTO","lineObject":"LÍNEA","rectangleObject":"RECTÁNGULO","circleObject":"CÍRCULO","triangleObject":"TRIÁNGULO","groupObject":"GRUPO","paintEditor":"EDITOR DE DIBUJO","copiedObjects":"OBJETOS COPIADOS"},
+  "zh":{"paint":"绘图","select":"选择","draw":"绘制","eraser":"橡皮擦","fill":"填充","addImage":"添加图片","addLineShape":"添加线条或形状","color":"颜色","brush":"画笔","undo":"撤销","redo":"重做","copy":"复制","paste":"粘贴","clipboard":"剪贴板","delete":"删除","clear":"清空","addText":"添加文字","sendText":"发送文字","noCopiedObjects":"没有已复制对象","textPlaceholder":"文字","object":"对象","multiObject":"多个对象","imageObject":"图片","textObject":"文字","lineObject":"线条","rectangleObject":"矩形","circleObject":"圆形","triangleObject":"三角形","groupObject":"组合","paintEditor":"绘图编辑器","copiedObjects":"已复制对象"},
+  "hi":{"paint":"पेंट","select":"चुनें","draw":"बनाएं","eraser":"रबर","fill":"भरें","addImage":"चित्र जोड़ें","addLineShape":"रेखा या आकृति जोड़ें","color":"रंग","brush":"ब्रश","undo":"पूर्ववत","redo":"फिर करें","copy":"कॉपी","paste":"पेस्ट","clipboard":"क्लिपबोर्ड","delete":"हटाएं","clear":"साफ़ करें","addText":"टेक्स्ट जोड़ें","sendText":"टेक्स्ट भेजें","noCopiedObjects":"कोई कॉपी की गई वस्तु नहीं","textPlaceholder":"टेक्स्ट","object":"वस्तु","multiObject":"कई वस्तुएं","imageObject":"चित्र","textObject":"टेक्स्ट","lineObject":"रेखा","rectangleObject":"आयत","circleObject":"वृत्त","triangleObject":"त्रिभुज","groupObject":"समूह","paintEditor":"पेंट संपादक","copiedObjects":"कॉपी की गई वस्तुएं"},
+  "ar":{"paint":"رسم","select":"تحديد","draw":"ارسم","eraser":"ممحاة","fill":"تعبئة","addImage":"إضافة صورة","addLineShape":"إضافة خط أو شكل","color":"اللون","brush":"الفرشاة","undo":"تراجع","redo":"إعادة","copy":"نسخ","paste":"لصق","clipboard":"الحافظة","delete":"حذف","clear":"مسح","addText":"إضافة نص","sendText":"إرسال نص","noCopiedObjects":"لا توجد عناصر منسوخة","textPlaceholder":"نص","object":"عنصر","multiObject":"عناصر متعددة","imageObject":"صورة","textObject":"نص","lineObject":"خط","rectangleObject":"مستطيل","circleObject":"دائرة","triangleObject":"مثلث","groupObject":"مجموعة","paintEditor":"محرر الرسم","copiedObjects":"العناصر المنسوخة"},
+  "fa":{"paint":"نقاشی","select":"انتخاب","draw":"رسم","eraser":"پاک‌کن","fill":"پر کردن","addImage":"افزودن تصویر","addLineShape":"افزودن خط یا شکل","color":"رنگ","brush":"قلم‌مو","undo":"واگرد","redo":"انجام دوباره","copy":"کپی","paste":"چسباندن","clipboard":"کلیپ‌بورد","delete":"حذف","clear":"پاک کردن","addText":"افزودن متن","sendText":"ارسال متن","noCopiedObjects":"شیء کپی‌شده‌ای نیست","textPlaceholder":"متن","object":"شیء","multiObject":"چند شیء","imageObject":"تصویر","textObject":"متن","lineObject":"خط","rectangleObject":"مستطیل","circleObject":"دایره","triangleObject":"مثلث","groupObject":"گروه","paintEditor":"ویرایشگر نقاشی","copiedObjects":"اشیای کپی‌شده"},
+  "sw":{"paint":"CHORA","select":"CHAGUA","draw":"CHORA","eraser":"KIFUTIO","fill":"JAZA","addImage":"ONGEZA PICHA","addLineShape":"ONGEZA MSTARI AU UMBO","color":"RANGI","brush":"BRASHI","undo":"TENDUA","redo":"RUDIA","copy":"NAKILI","paste":"BANDIKA","clipboard":"UBAO NAKILI","delete":"FUTA","clear":"SAFISHA","addText":"ONGEZA MAANDISHI","sendText":"TUMA MAANDISHI","noCopiedObjects":"HAKUNA VITU VILIVYONAKILIWA","textPlaceholder":"MAANDISHI","object":"KITU","multiObject":"VITU VINGI","imageObject":"PICHA","textObject":"MAANDISHI","lineObject":"MSTARI","rectangleObject":"MSTATILI","circleObject":"DUARA","triangleObject":"PEMBETATU","groupObject":"KUNDI","paintEditor":"KIHARIRI CHA MCHORO","copiedObjects":"VITU VILIVYONAKILIWA"},
+  "am":{"paint":"ስዕል","select":"ይምረጡ","draw":"ይሳሉ","eraser":"ማጥፊያ","fill":"ይሙሉ","addImage":"ምስል ያክሉ","addLineShape":"መስመር ወይም ቅርጽ ያክሉ","color":"ቀለም","brush":"ብሩሽ","undo":"ቀልብስ","redo":"ድገም","copy":"ቅዳ","paste":"ለጥፍ","clipboard":"ቅንጥብ ሰሌዳ","delete":"ሰርዝ","clear":"አጽዳ","addText":"ጽሑፍ ያክሉ","sendText":"ጽሑፍ ላክ","noCopiedObjects":"የተቀዱ ነገሮች የሉም","textPlaceholder":"ጽሑፍ","object":"ነገር","multiObject":"ብዙ ነገሮች","imageObject":"ምስል","textObject":"ጽሑፍ","lineObject":"መስመር","rectangleObject":"አራት ማዕዘን","circleObject":"ክብ","triangleObject":"ሶስት ማዕዘን","groupObject":"ቡድን","paintEditor":"የስዕል አርታዒ","copiedObjects":"የተቀዱ ነገሮች"},
+  "ha":{"paint":"ZANA","select":"ZAƁA","draw":"ZANA","eraser":"GOGEWA","fill":"CIKA","addImage":"ƘARA HOTO","addLineShape":"ƘARA LAYI KO SIFFA","color":"LAUNI","brush":"GOGA","undo":"MAYAR BAYA","redo":"SAKE YI","copy":"KWAFE","paste":"MANNA","clipboard":"ALLO KWAFE","delete":"SHARE","clear":"TSAFTACE","addText":"ƘARA RUBUTU","sendText":"AIKA RUBUTU","noCopiedObjects":"BABU ABIN DA AKA KWAFE","textPlaceholder":"RUBUTU","object":"ABU","multiObject":"ABUBUWA DA YAWA","imageObject":"HOTO","textObject":"RUBUTU","lineObject":"LAYI","rectangleObject":"MURABBA'I","circleObject":"DA'IRA","triangleObject":"ALWALWALA","groupObject":"RUKUNI","paintEditor":"MAI GYARAN ZANE","copiedObjects":"ABUBUWAN DA AKA KWAFE"},
+  "yo":{"paint":"YÀWORÁN","select":"YÀN","draw":"YÀ","eraser":"PÁRẸ́","fill":"KÚN","addImage":"ṢÀFIKÚN ÀWÒRÁN","addLineShape":"ṢÀFIKÚN ÌLÀ TÀBÍ ÀPẸẸRẸ","color":"ÀWỌ̀","brush":"BỌ́Ọ̀ṢÌ","undo":"PADÀ","redo":"TÚN ṢE","copy":"DÀKỌ","paste":"LẸ̀","clipboard":"PÁTÁKÓ ÌDÁKỌ","delete":"PAARẸ́","clear":"NÚ","addText":"ṢÀFIKÚN Ọ̀RỌ̀","sendText":"FI Ọ̀RỌ̀ RÁNṢẸ́","noCopiedObjects":"KÒ SÍ OHUN TÍ A DÀKỌ","textPlaceholder":"Ọ̀RỌ̀","object":"OHUN","multiObject":"Ọ̀PỌ̀ OHUN","imageObject":"ÀWÒRÁN","textObject":"Ọ̀RỌ̀","lineObject":"ÌLÀ","rectangleObject":"ONÍGUNMẸ́RIN","circleObject":"ÒRÙKA","triangleObject":"ONÍGUNMẸ́TA","groupObject":"ẸGBẸ́","paintEditor":"OLÓṢÙN ÀWÒRÁN","copiedObjects":"ÀWỌN OHUN TÍ A DÀKỌ"},
+  "zu":{"paint":"PENDA","select":"KHETHA","draw":"DWEBA","eraser":"IRABHA","fill":"GCWALISA","addImage":"ENGEZA ISITHOMBE","addLineShape":"ENGEZA UMUGQA NOMA UMUMO","color":"UMBALA","brush":"IBHULASHI","undo":"HLEHLISA","redo":"PHINDA","copy":"KOPISHA","paste":"NAMATHISELA","clipboard":"IBHODI LOKUNAMATHISELA","delete":"SUSA","clear":"SULA","addText":"ENGEZA UMBHALO","sendText":"THUMELA UMBHALO","noCopiedObjects":"AZIKHO IZINTO EZIKOPISHIWE","textPlaceholder":"UMBHALO","object":"INTO","multiObject":"IZINTO EZININGI","imageObject":"ISITHOMBE","textObject":"UMBHALO","lineObject":"UMUGQA","rectangleObject":"UNXANDE","circleObject":"INDILINGA","triangleObject":"UNXANTATHU","groupObject":"IQEMBU","paintEditor":"UMHLELI WOKUDWEBA","copiedObjects":"IZINTO EZIKOPISHIWE"}
+};
 const REMOTE_FILE="sitemap-data.json";
 const layoutCanvas=document.getElementById("layoutCanvas");
 const languagePanel=document.getElementById("languagePanel");
@@ -642,7 +653,7 @@ function applyPaintButtonLayout(xValue=paintButtonX,yValue=paintButtonY,sizeValu
   let measuredPaintWidth=300;
   if(paintTextMeasureContext){
     paintTextMeasureContext.font="900 100px Arial";
-    measuredPaintWidth=Math.max(1,paintTextMeasureContext.measureText("PAINT").width);
+    measuredPaintWidth=Math.max(1,paintTextMeasureContext.measureText(String(paintToolButton&&paintToolButton.textContent||"PAINT")).width);
   }
   const fittedFont=Math.max(
     7,
@@ -987,7 +998,7 @@ function fitPaintToolbar(){
         bestColumns=columns;
       }
     }
-    syncPaintLandscapeFourColumnOrder(bestColumns);
+    syncPaintSpecialToolOrder(bestColumns);
     const fittedControls=paintToolControls();
     const regularRows=Math.max(1,Math.ceil(Math.max(0,fittedControls.length-1)/bestColumns));
     const rows=regularRows+1;
@@ -1234,19 +1245,100 @@ function resizeFabricCanvas(){
   fabricCanvas.calcOffset();
   fabricCanvas.requestRenderAll();
 }
-const PAINT_TOOL_ORDER_KEY="TEXT_SITEMAP_PAINT_TOOL_ORDER_V2";
-const PAINT_TOOL_ORDER_LEGACY_KEY="TEXT_SITEMAP_PAINT_TOOL_ORDER_V1";
-const PAINT_LANDSCAPE_FOUR_ORDER_KEY="TEXT_SITEMAP_PAINT_TOOL_ORDER_MOBILE_LANDSCAPE_4COL_V1";
-const PAINT_LANDSCAPE_FOUR_COLUMN_ORDER=[
+const PAINT_MOBILE_PORTRAIT_TWO_COLUMN_ORDER=[
   "paintTextButton",
-  "paintDrawButton","paintSelectButton","paintCopyButton","paintPasteButton",
-  "paintEraserButton","paintDeleteButton","paintClearButton","paintUndoButton",
-  "paintSizeInput","paintLineButton","paintAddTextButton","paintRedoButton",
-  "paintColorInput","paintFillButton","paintAddImageButton","paintClipboardButton"
+  "paintClearButton","paintUndoButton",
+  "paintClipboardButton","paintRedoButton",
+  "paintPasteButton","paintAddTextButton",
+  "paintCopyButton","paintAddImageButton",
+  "paintDeleteButton","paintLineButton",
+  "paintEraserButton","paintFillButton",
+  "paintSelectButton","paintSizeInput",
+  "paintDrawButton","paintColorInput"
 ];
-let paintToolDragState=null;
-let suppressPaintToolClick=false;
-let paintSpecialLandscapeFourOrderApplied=false;
+const PAINT_MOBILE_PORTRAIT_THREE_COLUMN_ORDER=[
+  "paintTextButton",
+  "paintClearButton","paintCopyButton","paintUndoButton",
+  "paintDeleteButton","paintPasteButton","paintRedoButton",
+  "paintClipboardButton","paintAddTextButton","paintAddImageButton",
+  "paintEraserButton","paintLineButton","paintFillButton",
+  "paintSelectButton","paintSizeInput","paintColorInput",
+  "paintDrawButton"
+];
+const PAINT_MOBILE_PORTRAIT_FOUR_COLUMN_ORDER=[
+  "paintTextButton",
+  "paintClearButton","paintUndoButton","paintRedoButton","paintClipboardButton",
+  "paintDeleteButton","paintPasteButton","paintAddTextButton","paintAddImageButton",
+  "paintSelectButton","paintCopyButton","paintLineButton","paintFillButton",
+  "paintDrawButton","paintEraserButton","paintSizeInput","paintColorInput"
+];
+const PAINT_MOBILE_LANDSCAPE_TWO_COLUMN_ORDER=[
+  "paintTextButton",
+  "paintDrawButton","paintColorInput",
+  "paintSelectButton","paintSizeInput",
+  "paintEraserButton","paintFillButton",
+  "paintDeleteButton","paintLineButton",
+  "paintCopyButton","paintAddImageButton",
+  "paintPasteButton","paintAddTextButton",
+  "paintClipboardButton","paintRedoButton",
+  "paintClearButton","paintUndoButton"
+];
+const PAINT_MOBILE_LANDSCAPE_THREE_COLUMN_ORDER=[
+  "paintTextButton",
+  "paintClearButton","paintDeleteButton","paintDrawButton",
+  "paintCopyButton","paintPasteButton","paintSelectButton",
+  "paintUndoButton","paintRedoButton","paintEraserButton",
+  "paintAddTextButton","paintLineButton","paintSizeInput",
+  "paintAddImageButton","paintFillButton","paintColorInput",
+  "paintClipboardButton"
+];
+const PAINT_MOBILE_LANDSCAPE_FOUR_COLUMN_ORDER=[
+  "paintTextButton",
+  "paintClearButton","paintDeleteButton","paintSelectButton","paintDrawButton",
+  "paintUndoButton","paintPasteButton","paintCopyButton","paintEraserButton",
+  "paintRedoButton","paintAddTextButton","paintLineButton","paintSizeInput",
+  "paintClipboardButton","paintAddImageButton","paintFillButton","paintColorInput"
+];
+const PAINT_DESKTOP_ONE_COLUMN_ORDER=[
+  "paintTextButton",
+  "paintDrawButton",
+  "paintSelectButton",
+  "paintEraserButton",
+  "paintCopyButton",
+  "paintPasteButton",
+  "paintDeleteButton",
+  "paintClearButton",
+  "paintClipboardButton",
+  "paintUndoButton",
+  "paintRedoButton",
+  "paintAddTextButton",
+  "paintAddImageButton",
+  "paintLineButton",
+  "paintFillButton",
+  "paintSizeInput",
+  "paintColorInput"
+];
+const PAINT_DESKTOP_TWO_COLUMN_ORDER=[
+  "paintTextButton",
+  "paintDrawButton","paintColorInput",
+  "paintSelectButton","paintSizeInput",
+  "paintEraserButton","paintFillButton",
+  "paintDeleteButton","paintLineButton",
+  "paintCopyButton","paintAddImageButton",
+  "paintPasteButton","paintAddTextButton",
+  "paintClipboardButton","paintRedoButton",
+  "paintClearButton","paintUndoButton"
+];
+const PAINT_DESKTOP_THREE_COLUMN_ORDER=[
+  "paintTextButton",
+  "paintClearButton","paintDeleteButton","paintDrawButton",
+  "paintCopyButton","paintPasteButton","paintSelectButton",
+  "paintUndoButton","paintRedoButton","paintEraserButton",
+  "paintAddTextButton","paintLineButton","paintSizeInput",
+  "paintAddImageButton","paintFillButton","paintColorInput",
+  "paintClipboardButton"
+];
+let paintSpecialToolOrderMode="";
 let paintStoredNonSpecialToolOrder=null;
 
 function paintToolControlKey(control){
@@ -1261,35 +1353,6 @@ function paintToolControls(){
     !control.hidden&&
     control.id!=="paintTextSizeInput"
   );
-}
-function savePaintToolOrder(){
-  const order=paintToolControls().map(paintToolControlKey).filter(Boolean);
-  const key=paintSpecialLandscapeFourOrderApplied&&isPaintMobileLandscape()
-    ?PAINT_LANDSCAPE_FOUR_ORDER_KEY
-    :PAINT_TOOL_ORDER_KEY;
-  try{localStorage.setItem(key,JSON.stringify(order));}catch(_){}
-}
-function loadPaintToolOrder(){
-  let order=null;
-  try{order=JSON.parse(localStorage.getItem(PAINT_TOOL_ORDER_KEY)||"null");}catch(_){order=null;}
-  if(!Array.isArray(order)){
-    let legacy=null;
-    try{legacy=JSON.parse(localStorage.getItem(PAINT_TOOL_ORDER_LEGACY_KEY)||"null");}catch(_){legacy=null;}
-    if(legacy&&typeof legacy==="object"){
-      const sequence=["DRAW-CREATE","EDIT","TRANSFORM","LAYERS","ALIGN","TEXT","OUTPUT"];
-      order=sequence.flatMap(key=>Array.isArray(legacy[key])?legacy[key]:[]);
-    }
-  }
-  if(!Array.isArray(order))return;
-  const controls=new Map(paintToolControls().map(control=>[paintToolControlKey(control),control]));
-  const used=new Set();
-  order.forEach(key=>{
-    const control=controls.get(key);
-    if(!control||used.has(key))return;
-    paintToolbarGroups.append(control);
-    used.add(key);
-  });
-  controls.forEach((control,key)=>{if(!used.has(key))paintToolbarGroups.append(control);});
 }
 function paintCurrentToolOrder(){
   return paintToolControls().map(paintToolControlKey).filter(Boolean);
@@ -1307,26 +1370,31 @@ function applyPaintToolOrder(order){
     if(!used.has(key))paintToolbarGroups.append(control);
   });
 }
-function paintUseLandscapeFourColumnOrder(bestColumns){
-  return isPaintMobileLandscape()&&bestColumns===4;
+function paintSpecialToolModeFor(bestColumns){
+  if(window.matchMedia("(min-width:821px)").matches){
+    if(bestColumns===1)return"desktop-one";
+    if(bestColumns===2)return"desktop-two";
+    if(bestColumns===3)return"desktop-three";
+  }
+  if(isPaintMobileLandscape()){
+    if(bestColumns===2)return"mobile-two";
+    if(bestColumns===3)return"mobile-three";
+    if(bestColumns===4)return"mobile-four";
+  }
+  if(isPaintStackedLayout()){
+    if(bestColumns===2)return"mobile-portrait-two";
+    if(bestColumns===3)return"mobile-portrait-three";
+    if(bestColumns===4)return"mobile-portrait-four";
+  }
+  return"";
 }
-function syncPaintLandscapeFourColumnOrder(bestColumns){
+function syncPaintSpecialToolOrder(bestColumns){
+  const nextMode=paintSpecialToolModeFor(bestColumns);
   const current=paintCurrentToolOrder();
   if(!current.length)return;
-  if(paintUseLandscapeFourColumnOrder(bestColumns)){
-    if(paintSpecialLandscapeFourOrderApplied)return;
-    paintStoredNonSpecialToolOrder=current.slice();
-    let saved=null;
-    try{saved=JSON.parse(localStorage.getItem(PAINT_LANDSCAPE_FOUR_ORDER_KEY)||"null");}catch(_){saved=null;}
-    const preferred=Array.isArray(saved)&&saved.length?saved:PAINT_LANDSCAPE_FOUR_COLUMN_ORDER;
-    const desired=preferred.filter(key=>current.includes(key)).concat(
-      current.filter(key=>!preferred.includes(key))
-    );
-    if(JSON.stringify(current)!==JSON.stringify(desired))applyPaintToolOrder(desired);
-    paintSpecialLandscapeFourOrderApplied=true;
-    return;
-  }
-  if(paintSpecialLandscapeFourOrderApplied){
+  if(nextMode===paintSpecialToolOrderMode)return;
+
+  if(paintSpecialToolOrderMode){
     const restore=(Array.isArray(paintStoredNonSpecialToolOrder)&&paintStoredNonSpecialToolOrder.length
       ?paintStoredNonSpecialToolOrder
       :current
@@ -1335,115 +1403,40 @@ function syncPaintLandscapeFourColumnOrder(bestColumns){
       current.filter(key=>!restore.includes(key))
     );
     if(JSON.stringify(current)!==JSON.stringify(desired))applyPaintToolOrder(desired);
-    paintSpecialLandscapeFourOrderApplied=false;
+    paintSpecialToolOrderMode="";
     paintStoredNonSpecialToolOrder=null;
   }
-}
-function syncPaintToolFullLengthSlot(){
-  const controls=paintToolControls();
-  controls.forEach(control=>control.style.removeProperty("grid-column"));
-  if(controls.length)controls[0].style.gridColumn="1/-1";
-}
-function beginPaintToolDragging(state){
-  if(!state||state.dragging)return;
-  state.dragging=true;
-  suppressPaintToolClick=true;
-  const rect=state.control.getBoundingClientRect();
-  state.offsetX=state.startX-rect.left;
-  state.offsetY=state.startY-rect.top;
-  state.ghost=state.control.cloneNode(true);
-  state.ghost.removeAttribute("id");
-  state.ghost.querySelectorAll("[id]").forEach(node=>node.removeAttribute("id"));
-  state.ghost.classList.remove("active","paint-inverse-flash","paint-green-flash","paint-tool-drag-source");
-  state.ghost.classList.add("paint-tool-drag-ghost");
-  state.ghost.querySelectorAll("input,select,button").forEach(node=>node.disabled=true);
-  Object.assign(state.ghost.style,{
-    left:rect.left+"px",top:rect.top+"px",width:rect.width+"px",height:rect.height+"px"
-  });
-  document.body.append(state.ghost);
-  state.control.classList.add("paint-tool-drag-source");
-  syncPaintToolFullLengthSlot();
-  document.body.classList.add("paint-tool-drag-active");
-}
-function startPaintToolDrag(event){
-  if(event.pointerType==="mouse"&&event.button!==0)return;
-  if(event.target instanceof Element&&event.target.closest("input,textarea,select"))return;
-  const control=event.target instanceof Element
-    ?event.target.closest(".paint-tool-button,.paint-tool-field,.paint-tool-select")
-    :null;
-  if(!control||control.parentElement!==paintToolbarGroups)return;
-  const touch=event.pointerType!=="mouse";
-  paintToolDragState={
-    control,pointerId:event.pointerId,startX:event.clientX,startY:event.clientY,
-    dragging:false,touch,longPressTimer:0,offsetX:0,offsetY:0,ghost:null,lastTarget:null
-  };
-  if(touch){
-    paintToolDragState.longPressTimer=setTimeout(()=>{
-      if(paintToolDragState&&paintToolDragState.control===control)beginPaintToolDragging(paintToolDragState);
-    },250);
-  }else{
-    try{control.setPointerCapture(event.pointerId);}catch(_){}
-  }
-}
-function swapPaintToolControls(first,second){
-  if(!first||!second||first===second||first.parentElement!==paintToolbarGroups||second.parentElement!==paintToolbarGroups)return;
-  const marker=document.createComment("paint-tool-swap");
-  paintToolbarGroups.insertBefore(marker,first);
-  paintToolbarGroups.insertBefore(first,second);
-  paintToolbarGroups.insertBefore(second,marker);
-  marker.remove();
-}
-function paintToolSwapTarget(clientX,clientY,dragged){
-  const element=document.elementFromPoint(clientX,clientY);
-  const target=element instanceof Element
-    ?element.closest(".paint-tool-button,.paint-tool-field,.paint-tool-select")
-    :null;
-  return target&&target!==dragged&&target.parentElement===paintToolbarGroups?target:null;
-}
-function movePaintToolDrag(event){
-  const state=paintToolDragState;
-  if(!state||event.pointerId!==state.pointerId)return;
-  const distance=Math.hypot(event.clientX-state.startX,event.clientY-state.startY);
-  if(!state.dragging){
-    if(state.touch){
-      if(distance>14){
-        clearTimeout(state.longPressTimer);
-        paintToolDragState=null;
-      }
-      return;
-    }
-    if(distance<3)return;
-    beginPaintToolDragging(state);
-  }
-  event.preventDefault();
-  if(state.ghost){
-    state.ghost.style.transform=`translate3d(${event.clientX-state.offsetX-parseFloat(state.ghost.style.left)}px,${event.clientY-state.offsetY-parseFloat(state.ghost.style.top)}px,0)`;
-  }
-  const target=paintToolSwapTarget(event.clientX,event.clientY,state.control);
-  if(!target||target===state.lastTarget)return;
-  state.lastTarget=target;
-  swapPaintToolControls(state.control,target);
-  syncPaintToolFullLengthSlot();
-}
-function finishPaintToolDrag(event){
-  const state=paintToolDragState;
-  if(!state)return;
-  if(event&&event.pointerId!==undefined&&event.pointerId!==state.pointerId)return;
-  if(state.longPressTimer)clearTimeout(state.longPressTimer);
-  const dragged=state.dragging;
-  state.control.classList.remove("paint-tool-drag-source");
-  if(state.ghost)state.ghost.remove();
-  try{if(event&&state.control.hasPointerCapture(event.pointerId))state.control.releasePointerCapture(event.pointerId);}catch(_){}
-  document.body.classList.remove("paint-tool-drag-active");
-  paintToolDragState=null;
-  if(dragged){
-    savePaintToolOrder();
-    fitPaintToolbar();
-    showToast("TOOL ORDER SAVED");
-  }
-  setTimeout(()=>{suppressPaintToolClick=false;},180);
-}
 
+  if(!nextMode)return;
+
+  const regularOrder=paintCurrentToolOrder();
+  paintStoredNonSpecialToolOrder=regularOrder.slice();
+  let preferred;
+  if(nextMode==="mobile-two"){
+    preferred=PAINT_MOBILE_LANDSCAPE_TWO_COLUMN_ORDER;
+  }else if(nextMode==="mobile-three"){
+    preferred=PAINT_MOBILE_LANDSCAPE_THREE_COLUMN_ORDER;
+  }else if(nextMode==="mobile-four"){
+    preferred=PAINT_MOBILE_LANDSCAPE_FOUR_COLUMN_ORDER;
+  }else if(nextMode==="mobile-portrait-two"){
+    preferred=PAINT_MOBILE_PORTRAIT_TWO_COLUMN_ORDER;
+  }else if(nextMode==="mobile-portrait-three"){
+    preferred=PAINT_MOBILE_PORTRAIT_THREE_COLUMN_ORDER;
+  }else if(nextMode==="mobile-portrait-four"){
+    preferred=PAINT_MOBILE_PORTRAIT_FOUR_COLUMN_ORDER;
+  }else if(nextMode==="desktop-two"){
+    preferred=PAINT_DESKTOP_TWO_COLUMN_ORDER;
+  }else if(nextMode==="desktop-three"){
+    preferred=PAINT_DESKTOP_THREE_COLUMN_ORDER;
+  }else{
+    preferred=PAINT_DESKTOP_ONE_COLUMN_ORDER;
+  }
+  const desired=preferred.filter(key=>regularOrder.includes(key)).concat(
+    regularOrder.filter(key=>!preferred.includes(key))
+  );
+  if(JSON.stringify(regularOrder)!==JSON.stringify(desired))applyPaintToolOrder(desired);
+  paintSpecialToolOrderMode=nextMode;
+}
 function openPaintTool(){
   if(suppressPaintLaunchClick||(devUnlocked&&dragEnabled))return;
   if(!ensureFabricCanvas())return;
@@ -1694,7 +1687,7 @@ function deletePaintSelection(){if(!fabricCanvas)return;selectedPaintObjects().f
 function addPaintLine(){if(!fabricCanvas)return;const length=Math.min(240,fabricCanvas.getWidth()*.35);const line=new fabric.Line([0,0,length,0],{left:fabricCanvas.getWidth()/2,top:fabricCanvas.getHeight()/2,stroke:paintColorInput.value,strokeWidth:Math.max(1,Number(paintSizeInput.value||8)),originX:"center",originY:"center"});fabricCanvas.add(line);fabricCanvas.discardActiveObject();setPaintMode("draw");fabricCanvas.requestRenderAll();}
 function addPaintText(){
   if(!fabricCanvas)return;
-  const text=new fabric.IText("TEXT",{
+  const text=new fabric.IText(paintUiText().textPlaceholder,{
     left:fabricCanvas.getWidth()/2,
     top:fabricCanvas.getHeight()/2,
     originX:"center",
@@ -1794,7 +1787,24 @@ function paintClipboardObjectLabel(object){
     .replace(/[_-]+/g," ")
     .toUpperCase();
   if(type==="PATH")return"";
-  return type==="ACTIVESELECTION"?"MULTI OBJECT":type;
+  const labels=paintUiText();
+  const mapped={
+    "OBJECT":labels.object,
+    "ACTIVESELECTION":labels.multiObject,
+    "ACTIVE SELECTION":labels.multiObject,
+    "IMAGE":labels.imageObject,
+    "I TEXT":labels.textObject,
+    "ITEXT":labels.textObject,
+    "TEXTBOX":labels.textObject,
+    "TEXT":labels.textObject,
+    "LINE":labels.lineObject,
+    "RECT":labels.rectangleObject,
+    "RECTANGLE":labels.rectangleObject,
+    "CIRCLE":labels.circleObject,
+    "TRIANGLE":labels.triangleObject,
+    "GROUP":labels.groupObject
+  };
+  return mapped[type]||type;
 }
 
 function renderPaintClipboardHistory(){
@@ -1803,12 +1813,13 @@ function renderPaintClipboardHistory(){
   paintClipboardEmpty.hidden=paintClipboardHistory.length>0;
 
   paintClipboardHistory.forEach((entry,index)=>{
+    const translatedLabel=paintClipboardObjectLabel(entry.object);
     const tile=document.createElement("button");
     tile.type="button";
     tile.className="paint-clipboard-tile";
     tile.setAttribute(
       "aria-label",
-      `Paste copied ${(entry.label||"object").toLowerCase()} ${index+1}`
+      `${paintUiText().paste} ${translatedLabel||paintUiText().object} ${index+1}`
     );
 
     if(entry.preview){
@@ -1819,9 +1830,9 @@ function renderPaintClipboardHistory(){
       tile.append(image);
     }
 
-    if(entry.label){
+    if(translatedLabel){
       const label=document.createElement("span");
-      label.textContent=entry.label;
+      label.textContent=translatedLabel;
       tile.append(label);
     }
     tile.addEventListener("click",()=>{
@@ -2181,6 +2192,50 @@ function rebuildLanguageSelect(){
   fitSelectedLanguageText();
 }
 
+function paintUiText(){
+  return PAINT_I18N[language]||PAINT_I18N.en;
+}
+function setPaintControlText(control,text){
+  if(!control)return;
+  const words=String(text||"").trim().split(/\s+/).filter(Boolean);
+  control.replaceChildren();
+  (words.length?words:[""]).forEach(word=>{
+    const span=document.createElement("span");
+    span.className="paint-tool-word";
+    span.textContent=word;
+    control.append(span);
+  });
+}
+function applyPaintLanguage(){
+  const labels=paintUiText();
+  paintToolButton.textContent=labels.paint;
+  paintToolButton.setAttribute("aria-label",labels.paint);
+  setPaintControlText(paintSelectButton,labels.select);
+  setPaintControlText(paintDrawButton,labels.draw);
+  setPaintControlText(paintEraserButton,labels.eraser);
+  setPaintControlText(paintFillButton,labels.fill);
+  setPaintControlText(paintAddImageButton,labels.addImage);
+  setPaintControlText(paintLineButton,labels.addLineShape);
+  setPaintControlText(paintUndoButton,labels.undo);
+  setPaintControlText(paintRedoButton,labels.redo);
+  setPaintControlText(paintCopyButton,labels.copy);
+  setPaintControlText(paintPasteButton,labels.paste);
+  setPaintControlText(paintClipboardButton,labels.clipboard);
+  setPaintControlText(paintDeleteButton,labels.delete);
+  setPaintControlText(paintClearButton,labels.clear);
+  setPaintControlText(paintAddTextButton,labels.addText);
+  setPaintControlText(paintTextButton,labels.sendText);
+  const colorLabel=paintToolbarGroups.querySelector(".paint-color-square-control .paint-tool-field-label span");
+  const brushLabel=paintToolbarGroups.querySelector(".paint-brush-square-control .paint-tool-field-label span");
+  if(colorLabel)colorLabel.textContent=labels.color;
+  if(brushLabel)brushLabel.textContent=labels.brush;
+  paintClipboardEmpty.textContent=labels.noCopiedObjects;
+  paintModal.setAttribute("aria-label",labels.paintEditor);
+  paintClipboardPopup.setAttribute("aria-label",labels.copiedObjects);
+  applyPaintButtonLayout(paintButtonX,paintButtonY,paintButtonSize,false);
+  renderPaintClipboardHistory();
+  fitPaintToolbar();
+}
 function applyLanguage(value,save=true){
   language=SUPPORTED_LANGUAGES.includes(String(value))
     ?String(value)
@@ -2190,6 +2245,7 @@ function applyLanguage(value,save=true){
   cfg.enabledLanguages=[...enabledLanguages];
   document.documentElement.lang=language;
   rebuildLanguageSelect();
+  applyPaintLanguage();
   render();
 
   if(save){
@@ -3601,43 +3657,6 @@ paintSplitDivider.addEventListener("keydown",event=>{
   applyPaintSplit((pixels+(direction*PAINT_SPLIT_SNAP))/axis,true);
 });
 paintMobileCloseButton.addEventListener("click",closePaintTool);
-paintToolbar.addEventListener(
-  "pointerdown",
-  startPaintToolDrag,
-  true
-);
-window.addEventListener(
-  "pointermove",
-  movePaintToolDrag,
-  {passive:false,capture:true}
-);
-window.addEventListener(
-  "pointerup",
-  finishPaintToolDrag,
-  true
-);
-window.addEventListener(
-  "pointercancel",
-  finishPaintToolDrag,
-  true
-);
-paintToolbar.addEventListener(
-  "click",
-  event=>{
-    if(
-      suppressPaintToolClick&&
-      event.target instanceof Element&&
-      event.target.closest(
-        ".paint-tool-button,.paint-tool-select"
-      )
-    ){
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  },
-  true
-);
-
 paintSelectButton.addEventListener("click",()=>setPaintMode("select"));
 paintDrawButton.addEventListener("click",()=>setPaintMode("draw"));
 paintEraserButton.addEventListener("click",()=>setPaintMode("eraser"));
@@ -3895,7 +3914,6 @@ applyPaintButtonLayout(
   cfg.paintButtonSize||100,
   false
 );
-loadPaintToolOrder();
 rebuildLanguageSelect();
 applyLanguage(cfg.language||"en",false);
 setDevUnlocked(false,false);
