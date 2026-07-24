@@ -1809,9 +1809,7 @@ function applyLanguageControlLayout(
 function translatedDefaultTitle(item){
   if(!item||!item.i18nKey)return String(item&&item.title||"");
 
-  const current=LINK_I18N[language]||LINK_I18N.en;
-  return current[item.i18nKey]
-    ||LINK_I18N.en[item.i18nKey]
+  return LINK_I18N.en[item.i18nKey]
     ||String(item.title||"");
 }
 
@@ -3037,16 +3035,14 @@ function links(){
     .filter(item=>!hidden.has(String(item.url)))
     .map(item=>{
       const renamed=renames[item.url];
-      const baseTitle=language!=="en"&&item.i18nKey
-        ?translatedDefaultTitle(item)
-        :renamed
-          ?String(renamed)
-          :String(item.title||translatedDefaultTitle(item)||"");
+      const baseTitle=renamed
+        ?String(renamed)
+        :String(item.title||translatedDefaultTitle(item)||"");
 
       return{
         ...item,
-        title:baseTitle.toLocaleUpperCase(language),
-        direction:item.i18nKey&&RTL_LANGUAGES.has(language)?"rtl":"ltr"
+        title:baseTitle.toLocaleUpperCase("en-US"),
+        direction:"ltr"
       };
     });
 }
