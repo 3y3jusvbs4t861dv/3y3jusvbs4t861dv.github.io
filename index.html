@@ -63,11 +63,11 @@ body.paint-tool-drag-active{cursor:grabbing!important;user-select:none!important
   .paint-tool-grid{height:100%;min-height:0;overflow:hidden}
 }
 @media(max-width:820px) and (orientation:landscape){
-  .paint-workspace{grid-template-columns:minmax(0,1fr) 11px var(--paint-tools-px)}
-  .paint-canvas-column{grid-column:1;grid-row:1}
+  .paint-workspace{grid-template-columns:var(--paint-tools-px) 11px minmax(0,1fr)}
+  .paint-tools-area{grid-column:1;grid-row:1}
   .paint-split-divider{grid-column:2;grid-row:1}
-  .paint-tools-area{grid-column:3;grid-row:1}
-  .paint-mobile-close{top:-16px;left:calc(100% - var(--paint-tools-px) - 8px)}
+  .paint-canvas-column{grid-column:3;grid-row:1}
+  .paint-mobile-close{top:-16px;left:-16px}
 }
 @media(max-width:820px) and (orientation:portrait){
   .paint-workspace{grid-template-columns:1fr;grid-template-rows:var(--paint-tools-px) 11px minmax(0,1fr)}
@@ -1031,9 +1031,7 @@ function movePaintSplitDrag(event){
     :rect.width;
   const position=isPaintStackedLayout()
     ?event.clientY-rect.top
-    :isPaintMobileLandscape()
-      ?rect.right-event.clientX
-      :event.clientX-rect.left;
+    :event.clientX-rect.left;
 
   applyPaintSplit(
     snapPaintSplit(position)/Math.max(1,axis),
@@ -1238,6 +1236,7 @@ function resizeFabricCanvas(){
 }
 const PAINT_TOOL_ORDER_KEY="TEXT_SITEMAP_PAINT_TOOL_ORDER_V2";
 const PAINT_TOOL_ORDER_LEGACY_KEY="TEXT_SITEMAP_PAINT_TOOL_ORDER_V1";
+const PAINT_LANDSCAPE_FOUR_ORDER_KEY="TEXT_SITEMAP_PAINT_TOOL_ORDER_MOBILE_LANDSCAPE_4COL_V1";
 const PAINT_LANDSCAPE_FOUR_COLUMN_ORDER=[
   "paintTextButton",
   "paintDrawButton","paintSelectButton","paintCopyButton","paintPasteButton",
@@ -1265,7 +1264,10 @@ function paintToolControls(){
 }
 function savePaintToolOrder(){
   const order=paintToolControls().map(paintToolControlKey).filter(Boolean);
-  try{localStorage.setItem(PAINT_TOOL_ORDER_KEY,JSON.stringify(order));}catch(_){}
+  const key=paintSpecialLandscapeFourOrderApplied&&isPaintMobileLandscape()
+    ?PAINT_LANDSCAPE_FOUR_ORDER_KEY
+    :PAINT_TOOL_ORDER_KEY;
+  try{localStorage.setItem(key,JSON.stringify(order));}catch(_){}
 }
 function loadPaintToolOrder(){
   let order=null;
@@ -1312,12 +1314,14 @@ function syncPaintLandscapeFourColumnOrder(bestColumns){
   const current=paintCurrentToolOrder();
   if(!current.length)return;
   if(paintUseLandscapeFourColumnOrder(bestColumns)){
-    const desired=PAINT_LANDSCAPE_FOUR_COLUMN_ORDER.filter(key=>current.includes(key)).concat(
-      current.filter(key=>!PAINT_LANDSCAPE_FOUR_COLUMN_ORDER.includes(key))
+    if(paintSpecialLandscapeFourOrderApplied)return;
+    paintStoredNonSpecialToolOrder=current.slice();
+    let saved=null;
+    try{saved=JSON.parse(localStorage.getItem(PAINT_LANDSCAPE_FOUR_ORDER_KEY)||"null");}catch(_){saved=null;}
+    const preferred=Array.isArray(saved)&&saved.length?saved:PAINT_LANDSCAPE_FOUR_COLUMN_ORDER;
+    const desired=preferred.filter(key=>current.includes(key)).concat(
+      current.filter(key=>!preferred.includes(key))
     );
-    if(!paintSpecialLandscapeFourOrderApplied){
-      paintStoredNonSpecialToolOrder=current.slice();
-    }
     if(JSON.stringify(current)!==JSON.stringify(desired))applyPaintToolOrder(desired);
     paintSpecialLandscapeFourOrderApplied=true;
     return;
@@ -3581,14 +3585,10 @@ paintSplitDivider.addEventListener("pointerup",finishPaintSplitDrag);
 paintSplitDivider.addEventListener("pointercancel",finishPaintSplitDrag);
 paintSplitDivider.addEventListener("keydown",event=>{
   const stacked=isPaintStackedLayout();
-  const rightPanel=isPaintMobileLandscape();
   let direction=0;
   if(stacked){
     if(event.key==="ArrowUp")direction=-1;
     if(event.key==="ArrowDown")direction=1;
-  }else if(rightPanel){
-    if(event.key==="ArrowLeft")direction=1;
-    if(event.key==="ArrowRight")direction=-1;
   }else{
     if(event.key==="ArrowLeft")direction=-1;
     if(event.key==="ArrowRight")direction=1;
