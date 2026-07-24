@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "updatedAt": 1784837704499,
-  "lastRemoteUpdatedAt": 1784835069404,
-  "lastRemoteSignature": "1434:630eaf23",
-  "fontSize": 17,
+  "updatedAt": 1784851899764,
+  "lastRemoteUpdatedAt": 1784837704499,
+  "lastRemoteSignature": "1638:6baea08",
+  "fontSize": 21,
   "menuWidth": 180,
   "language": "en",
   "languageX": 0,
   "languageY": 0,
   "languageControlSize": 180,
   "paintButtonX": 100,
-  "paintButtonY": 60.9271523178808,
+  "paintButtonY": 58.27814569536424,
   "paintButtonSize": 200,
   "enabledLanguages": [
     "en",
@@ -33,8 +33,20 @@
       "group": "Custom"
     },
     {
-      "title": ".",
-      "url": "https://google.com/",
+      "title": "SMALL BUSINESS SUPPORT NUMBERS",
+      "url": "https://3y3jusvbs4t861dv.github.io/SMALL__BUSINESS__SALES__SUPPORT.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "SMALL BUSINESS SUPPORT",
+      "url": "https://isell.my.site.com/s/schedule?language=en_US&amp;PageSource=Small_bus_supp",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "NUMBERS",
+      "url": "https://3y3jusvbs4t861dv.github.io/NUMBERS.pdf",
       "type": "WEB",
       "group": "Custom"
     }
@@ -43,7 +55,16 @@
     "https://unique-cow.staticdomains.app/TRACKING__AND__MANAGING__DELIVERIES.pdf"
   ],
   "renames": {
-    "https://3y3jusvbs4t861dv.github.io/TEMPORARY__HOLD__PACKAGE.pdf": "TEMPORARY HOLD PACKAGE"
+    "https://3y3jusvbs4t861dv.github.io/TEMPORARY__HOLD__PACKAGE.pdf": "TEMPORARY HOLD PACKAGE",
+    "https://3y3jusvbs4t861dv.github.io/SMALL__BUSINESS__SALES__SUPPORT.pdf": "SMALL BUSINESS SUPPORT NUMBERS",
+    "https://3y3jusvbs4t861dv.github.io/FEDEX__PHONE__NUMBER__MENU.pdf": "FEDEX PHONE MENU",
+    "https://3y3jusvbs4t861dv.github.io/DELIVERY__MANAGER.pdf": "DELIVERY MANAGER",
+    "https://3y3jusvbs4t861dv.github.io/DOOR_TAG.pdf": "DOOR TAG",
+    "https://3y3jusvbs4t861dv.github.io/SIGNATURE__AND__ID.pdf": "SIGNATURE & ID",
+    "https://3y3jusvbs4t861dv.github.io/PICKUP.pdf": "REQUEST PICKUP",
+    "https://www.airnavradar.com/@37.75100,-97.82200,z5?airline=FDX": "FEDEX FLIGHTS",
+    "https://www.fedex.com/shippingplus/en-us/guest/pickup/schedule-pickup": "SCHEDULE PICKUP",
+    "https://www.fedex.com/en-us/customer-support/faqs.html": "FAQS"
   },
   "layout": {
     "link-131rc7e": {
@@ -112,8 +133,8 @@
       "w": 192
     },
     "link-1l5qrqp": {
-      "x": 0,
-      "y": 32,
+      "x": 40,
+      "y": 104,
       "w": 192
     },
     "link-pd4sad": {
@@ -147,13 +168,23 @@
       "w": 192
     },
     "link-1f20vib": {
-      "x": 0,
-      "y": 104,
+      "x": 16,
+      "y": 312,
       "w": 192
     },
-    "link-1su0lqf": {
-      "x": 1208,
-      "y": 464,
+    "link-10k8xe5": {
+      "x": 976,
+      "y": 288,
+      "w": 192
+    },
+    "link-1tv42ji": {
+      "x": 0,
+      "y": 632,
+      "w": 192
+    },
+    "link-ie755n": {
+      "x": 200,
+      "y": 632,
       "w": 192
     }
   },
