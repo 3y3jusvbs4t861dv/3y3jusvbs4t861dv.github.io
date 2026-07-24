@@ -10,6 +10,7 @@
 main.drag-mode .grid>[data-site-grid-key] *{touch-action:none!important;user-select:none!important;-webkit-user-select:none!important;cursor:grab}
 .site-grid-drag-source{visibility:hidden!important;pointer-events:none!important;animation:none!important;transition:none!important}
 .site-grid-drag-ghost{position:fixed!important;z-index:10080!important;width:var(--site-drag-width)!important;min-width:var(--site-drag-width)!important;max-width:var(--site-drag-width)!important;height:var(--site-drag-height)!important;min-height:var(--site-drag-height)!important;max-height:var(--site-drag-height)!important;grid-area:auto!important;flex:none!important;margin:0!important;opacity:.96!important;pointer-events:none!important;outline:0!important;box-shadow:0 0 0 2px #660099!important;cursor:grabbing!important;animation:none!important;transition:none!important;will-change:left,top;overflow:hidden!important}
+.site-grid-pushing{will-change:transform}
 body.site-grid-drag-active{cursor:grabbing!important;user-select:none!important}
 .site-grid-filler{display:block;width:100%;height:100%;min-width:0;min-height:0;background:#ff6600;pointer-events:none}
 .tool-menu .export-button,.tool-menu .drag-toggle{height:auto!important;min-height:var(--menu-control-height,48px)!important;padding:8px 10px!important;white-space:normal!important;word-break:keep-all!important;overflow-wrap:normal!important;line-height:1.15!important;text-align:center!important;overflow:visible!important}#changeCodeButton{height:auto!important;min-height:var(--menu-control-height,48px)!important;padding:8px 10px!important;white-space:normal!important;word-break:keep-all!important;overflow-wrap:normal!important;line-height:1.15!important;font-size:min(var(--shared-font-size),18px)!important}.language-panel{position:relative;z-index:1;display:grid;width:100%;height:100%;min-width:0;min-height:0;grid-template-columns:1fr;grid-template-rows:1fr;background:#ff6600;overflow:hidden}
@@ -2410,9 +2411,41 @@ function swapSiteGridItems(first,second){
   marker.remove();
 }
 
+function animateSiteGridPush(first,second){
+  const items=siteGridItems();
+  const before=new Map(items.map(item=>[item,item.getBoundingClientRect()]));
+  swapSiteGridItems(first,second);
+  items.forEach(item=>{
+    const start=before.get(item);
+    if(!start)return;
+    const end=item.getBoundingClientRect();
+    const dx=start.left-end.left;
+    const dy=start.top-end.top;
+    if(Math.abs(dx)<.5&&Math.abs(dy)<.5)return;
+    item.classList.add("site-grid-pushing");
+    if(typeof item.animate==="function"){
+      const animation=item.animate(
+        [
+          {transform:`translate3d(${dx}px,${dy}px,0)`},
+          {transform:"translate3d(0,0,0)"}
+        ],
+        {duration:180,easing:"cubic-bezier(.2,.8,.2,1)"}
+      );
+      animation.addEventListener("finish",()=>item.classList.remove("site-grid-pushing"),{once:true});
+      animation.addEventListener("cancel",()=>item.classList.remove("site-grid-pushing"),{once:true});
+    }else{
+      item.classList.remove("site-grid-pushing");
+    }
+  });
+}
+
 function siteGridSwapTarget(clientX,clientY,dragged){
   const gridRect=grid.getBoundingClientRect();
   if(clientX<gridRect.left||clientX>gridRect.right||clientY<gridRect.top||clientY>gridRect.bottom)return null;
+  if(dragged){
+    const draggedRect=dragged.getBoundingClientRect();
+    if(clientX>=draggedRect.left&&clientX<=draggedRect.right&&clientY>=draggedRect.top&&clientY<=draggedRect.bottom)return null;
+  }
   const element=document.elementFromPoint(clientX,clientY);
   const direct=element instanceof Element?element.closest("[data-site-grid-key]"):null;
   if(direct&&direct!==dragged&&direct.parentElement===grid)return direct;
@@ -2421,14 +2454,7 @@ function siteGridSwapTarget(clientX,clientY,dragged){
     const rect=item.getBoundingClientRect();
     if(clientX>=rect.left&&clientX<=rect.right&&clientY>=rect.top&&clientY<=rect.bottom)return item;
   }
-  let nearest=null;
-  let nearestDistance=Infinity;
-  for(const item of candidates){
-    const rect=item.getBoundingClientRect();
-    const distance=Math.hypot(clientX-(rect.left+rect.width/2),clientY-(rect.top+rect.height/2));
-    if(distance<nearestDistance){nearest=item;nearestDistance=distance;}
-  }
-  return nearest;
+  return null;
 }
 
 function moveSiteGridDrag(event){
@@ -2446,7 +2472,13 @@ function moveSiteGridDrag(event){
     state.ghost.style.top=(event.clientY-state.offsetY)+"px";
     state.ghost.style.transform="none";
   }
-  state.dropTarget=siteGridSwapTarget(event.clientX,event.clientY,state.item);
+  const target=siteGridSwapTarget(event.clientX,event.clientY,state.item);
+  if(target&&target!==state.dropTarget){
+    state.dropTarget=target;
+    animateSiteGridPush(state.item,target);
+  }else if(!target){
+    state.dropTarget=null;
+  }
 }
 
 function finishSiteGridDrag(event){
@@ -2458,12 +2490,6 @@ function finishSiteGridDrag(event){
   if(event&&event.pointerId!==undefined&&event.pointerId!==state.pointerId)return;
   if(state.longPressTimer)clearTimeout(state.longPressTimer);
   const dragged=state.dragging;
-  const target=dragged
-    ?state.dropTarget||(event&&Number.isFinite(event.clientX)&&Number.isFinite(event.clientY)
-      ?siteGridSwapTarget(event.clientX,event.clientY,state.item)
-      :null)
-    :null;
-  if(target)swapSiteGridItems(state.item,target);
   state.item.classList.remove("site-grid-drag-source");
   if(state.ghost)state.ghost.remove();
   try{if(event&&grid.hasPointerCapture(event.pointerId))grid.releasePointerCapture(event.pointerId);}catch(_){}
