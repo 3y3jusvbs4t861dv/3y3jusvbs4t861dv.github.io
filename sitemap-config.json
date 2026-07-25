@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "updatedAt": 1784945986796,
-  "lastRemoteUpdatedAt": 1784905148310,
-  "lastRemoteSignature": "1759:467084aa",
+  "updatedAt": 1784946509611,
+  "lastRemoteUpdatedAt": 1784945986796,
+  "lastRemoteSignature": "3582:8bc478c8",
   "fontSize": 21,
   "menuWidth": 220,
   "language": "en",
@@ -13,7 +13,7 @@
   "paintButtonY": 0,
   "paintButtonSize": 100,
   "paintButtonNames": {
-    "en": "CAN'T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS ?\n────────────────\nDRAW ME A PICTURE"
+    "en": "CAN'T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS ?\n───────────────────────\nDRAW ME A PICTURE"
   },
   "linkTitleTranslations": {
     "es|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "¿No puede explicar las instrucciones de entrega con palabras? ──────────────── Dibujame un dibujo",
@@ -78,7 +78,6 @@
   "layout": {},
   "siteGridOrder": [
     "language-panel",
-    "request-language-button",
     "paint-launcher",
     "link-1wo8mg1",
     "link-h3xfyo",
@@ -99,6 +98,11 @@
     "empty-cube-1"
   ],
   "textNumber": "+19165000214",
-  "cubeSpans": {},
+  "cubeSpans": {
+    "__paint_button__": {
+      "cols": 2,
+      "rows": 1
+    }
+  },
   "devCode": "0000"
 }
