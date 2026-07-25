@@ -96,7 +96,7 @@ html.paint-editor-open,body.paint-editor-open{overflow:hidden!important;overscro
 
 /* Change-number and expandable-cube controls. */
 .change-number-box .new-dev-code-display,.change-number-box .new-dev-code-input{letter-spacing:.04em}
-.edit-link-expand{display:flex;width:100%;min-width:0;min-height:48px;align-items:center;justify-content:center;padding:4px;border:0;border-radius:0;color:#660099;background:#ff6600;font:900 12px/1.05 Arial,Helvetica,sans-serif;text-align:center;white-space:normal;overflow:hidden;cursor:pointer}
+.edit-link-expand{display:flex;width:100%;min-width:0;min-height:48px;align-items:center;justify-content:center;padding:2px;border:0;border-radius:0;color:#660099;background:#ff6600;font:900 12px/1 Arial,Helvetica,sans-serif;text-align:center;white-space:nowrap;word-break:keep-all;overflow-wrap:normal;overflow:hidden;cursor:pointer}
 .cube-expand-modal{position:fixed;inset:0;z-index:10030;display:none;place-items:center;padding:0;background:rgba(0,0,0,.78)}
 .cube-expand-modal.open{display:grid}
 .cube-expand-box{display:grid;width:min(100vw,calc(100dvh - 64px));height:100dvh;max-width:100vw;max-height:100dvh;grid-template-rows:minmax(0,1fr) 64px;gap:0;padding:0;background:transparent;overflow:hidden}
@@ -3213,7 +3213,7 @@ function fitPopupControlText(control,maxSize=64,minSize=12){
   const style=getComputedStyle(control);
   const availableWidth=Math.max(1,control.clientWidth-parseFloat(style.paddingLeft||0)-parseFloat(style.paddingRight||0));
   const availableHeight=Math.max(1,control.clientHeight-parseFloat(style.paddingTop||0)-parseFloat(style.paddingBottom||0));
-  const multiline=control instanceof HTMLTextAreaElement||control.tagName==="BUTTON";
+  const multiline=control instanceof HTMLTextAreaElement||(control.tagName==="BUTTON"&&!control.classList.contains("edit-link-expand"));
   const mirror=document.createElement("div");
   Object.assign(mirror.style,{
     position:"fixed",left:"-10000px",top:"-10000px",visibility:"hidden",pointerEvents:"none",
