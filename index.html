@@ -12,7 +12,7 @@ main.drag-mode .grid>[data-site-grid-key] *{touch-action:none!important;user-sel
 .site-grid-drag-ghost{position:fixed!important;z-index:10080!important;width:var(--site-drag-width)!important;min-width:var(--site-drag-width)!important;max-width:var(--site-drag-width)!important;height:var(--site-drag-height)!important;min-height:var(--site-drag-height)!important;max-height:var(--site-drag-height)!important;grid-area:auto!important;flex:none!important;margin:0!important;opacity:.96!important;pointer-events:none!important;outline:0!important;box-shadow:0 0 0 2px #660099!important;cursor:grabbing!important;animation:none!important;transition:none!important;will-change:left,top;overflow:hidden!important}
 .site-grid-pushing{will-change:transform}
 body.site-grid-drag-active{cursor:grabbing!important;user-select:none!important}
-.site-grid-filler{display:block;width:100%;height:100%;min-width:0;min-height:0;background:#ff6600;pointer-events:none}
+.site-grid-filler{display:block;width:100%;height:100%;min-width:0;min-height:0;background:#ff6600;pointer-events:auto}
 .tool-menu .export-button,.tool-menu .drag-toggle{display:flex!important;height:auto!important;min-height:var(--menu-control-height,48px)!important;align-items:center!important;justify-content:center!important;padding:6px 8px!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important;line-height:1.05!important;text-align:center!important;overflow:hidden!important}#changeCodeButton,#changeNumberButton,#dragToggleButton{height:auto!important;min-height:var(--menu-control-height,48px)!important;padding:2px 4px!important;white-space:normal!important;word-break:keep-all!important;overflow-wrap:normal!important;line-height:1.02!important}.language-panel{position:relative;z-index:1;display:grid;width:100%;height:100%;min-width:0;min-height:0;grid-template-columns:1fr;grid-template-rows:1fr;background:#ff6600;overflow:hidden}
 .language-select{position:relative;z-index:1;grid-column:1;grid-row:1;width:100%!important;height:100%!important;min-width:0!important;min-height:0;padding:0 28px 0 8px;border:0;border-radius:0;outline:none;color:transparent!important;-webkit-text-fill-color:transparent!important;background:#ff6600!important;font:900 var(--language-selected-font-size,var(--language-font-size,12px))/normal Arial,Helvetica,sans-serif!important;text-align:center;text-align-last:center;cursor:pointer}
 .language-select option{color:#660099!important;-webkit-text-fill-color:#660099!important;background:#ff6600;font-family:Arial,Helvetica,sans-serif!important;font-size:clamp(20px,calc(var(--language-height,36px)*.72),48px)!important;font-weight:900!important;line-height:1.1!important}
@@ -2667,6 +2667,37 @@ function layoutKeyForUrl(url){
   return"link-"+(hash>>>0).toString(36);
 }
 
+const SITE_GRID_FILLER_PREFIX="empty-cube-";
+let siteGridFillerSerial=0;
+
+function isSiteGridFillerKey(key){
+  return String(key||"").startsWith(SITE_GRID_FILLER_PREFIX);
+}
+
+function isSiteGridFiller(item){
+  return Boolean(item&&item.classList&&item.classList.contains("site-grid-filler"));
+}
+
+function nextSiteGridFillerKey(existingKeys=[]){
+  const used=new Set(existingKeys.map(String));
+  let key="";
+  do{
+    siteGridFillerSerial+=1;
+    key=SITE_GRID_FILLER_PREFIX+siteGridFillerSerial;
+  }while(used.has(key));
+  return key;
+}
+
+function createSiteGridFiller(key){
+  const filler=document.createElement("div");
+  filler.className="site-grid-filler";
+  filler.dataset.siteGridKey=String(key||nextSiteGridFillerKey());
+  filler.setAttribute("aria-label","EMPTY CUBE");
+  filler.setAttribute("role","button");
+  filler.tabIndex=-1;
+  return filler;
+}
+
 function siteGridItems(){
   return[...grid.children].filter(item=>item instanceof Element&&item.hasAttribute("data-site-grid-key"));
 }
@@ -2766,10 +2797,12 @@ function packedRowsForColumns(items,columns){
 }
 
 function fitSiteGrid(){
-  const items=siteGridItems();
+  const existingFillers=siteGridItems().filter(isSiteGridFiller);
+  const items=siteGridItems().filter(item=>!isSiteGridFiller(item));
   const count=items.length;
   const viewportWidth=Math.max(1,window.innerWidth||document.documentElement.clientWidth||grid.clientWidth);
   const height=Math.max(1,grid.clientHeight||window.innerHeight);
+  existingFillers.forEach(item=>item.remove());
   if(!count)return;
   const gap=5;
   const targetRatio=1.8;
@@ -2812,25 +2845,29 @@ function fitSiteGrid(){
     grid.style.width="100%";
     grid.style.maxWidth="100%";
   }
-  grid.querySelectorAll(":scope>.site-grid-filler").forEach(item=>item.remove());
   grid.style.gridTemplateColumns=`repeat(${bestColumns},minmax(0,1fr))`;
   grid.style.gridTemplateRows=`repeat(${bestRows},minmax(0,1fr))`;
   const fillerCount=Math.max(0,(bestColumns*bestRows)-totalArea);
-  for(let index=0;index<fillerCount;index++){
-    const filler=document.createElement("div");
-    filler.className="site-grid-filler";
-    filler.setAttribute("aria-hidden","true");
-    grid.append(filler);
+  const rememberedKeys=[
+    ...siteGridOrder.filter(isSiteGridFillerKey),
+    ...existingFillers.map(item=>String(item.dataset.siteGridKey||"")).filter(Boolean)
+  ].filter((key,index,array)=>key&&array.indexOf(key)===index);
+  while(rememberedKeys.length<fillerCount){
+    rememberedKeys.push(nextSiteGridFillerKey(rememberedKeys));
   }
+  const fillers=rememberedKeys.slice(0,fillerCount).map(createSiteGridFiller);
+  const orderedItems=applySiteGridOrder([...items,...fillers]);
+  grid.replaceChildren(...orderedItems);
   fitSiteGridTextControls();
   requestAnimationFrame(syncDevMenuDimensions);
 }
 
-function applySiteGridOrder(items){
+function applySiteGridOrder(items,preserveMissingFillers=false){
+  const previousOrder=[...siteGridOrder];
   const itemMap=new Map(items.map(item=>[String(item.dataset.siteGridKey||""),item]));
   const used=new Set();
   const ordered=[];
-  siteGridOrder.forEach(key=>{
+  previousOrder.forEach(key=>{
     const item=itemMap.get(String(key));
     if(!item||used.has(String(key)))return;
     ordered.push(item);
@@ -2842,7 +2879,22 @@ function applySiteGridOrder(items){
     ordered.push(item);
     used.add(key);
   });
-  siteGridOrder=ordered.map(item=>String(item.dataset.siteGridKey||""));
+  const orderedKeys=ordered.map(item=>String(item.dataset.siteGridKey||"")).filter(Boolean);
+  if(preserveMissingFillers){
+    const liveKeys=new Set(orderedKeys);
+    const preserved=[];
+    previousOrder.forEach(key=>{
+      const normalized=String(key||"");
+      if(!normalized)return;
+      if(isSiteGridFillerKey(normalized)||liveKeys.has(normalized)){
+        if(!preserved.includes(normalized))preserved.push(normalized);
+      }
+    });
+    orderedKeys.forEach(key=>{if(!preserved.includes(key))preserved.push(key);});
+    siteGridOrder=preserved;
+  }else{
+    siteGridOrder=orderedKeys;
+  }
   return ordered;
 }
 
@@ -3657,7 +3709,7 @@ function render(){
   paintLauncher.dataset.siteGridKey="paint-launcher";
   applyCubeSpanToElement(paintLauncher,PAINT_EDIT_KEY);
   const gridItems=[languagePanel,requestLanguageButton,...items.map(card),paintLauncher];
-  const ordered=applySiteGridOrder(gridItems);
+  const ordered=applySiteGridOrder(gridItems,true);
   grid.replaceChildren(...ordered);
   empty.style.display=items.length?"none":"block";
   requestAnimationFrame(()=>{
