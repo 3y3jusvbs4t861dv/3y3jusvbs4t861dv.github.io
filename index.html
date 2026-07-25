@@ -3057,6 +3057,10 @@ function finishSiteGridDrag(event){
   document.body.classList.remove("site-grid-drag-active");
   siteGridDragState=null;
   if(dragged){
+    // Capture the dropped DOM order before fitSiteGrid rebuilds the grid.
+    // This keeps normal and blank cubes in their new positions after drop.
+    siteGridOrder=currentSiteGridOrder();
+    cfg.siteGridOrder=[...siteGridOrder];
     fitSiteGrid();
     saveSiteGridOrder("SAVED");
   }
