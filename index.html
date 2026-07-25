@@ -3258,6 +3258,7 @@ function fitPopupTextControls(){
     fitPopupControlText(sendLanguageRequestButton,72,12);
     fitPopupControlText(languageRequestQrNote,96,12);
     fitPopupControlText(editLinkPopupCloseButton,72,12);
+    document.querySelectorAll(".edit-link-expand").forEach(control=>fitPopupControlText(control,96,5));
     if(editLinkPopupSaveButton&&!editLinkPopupSaveButton.hidden)fitPopupControlText(editLinkPopupSaveButton,72,12);
   });
 }
