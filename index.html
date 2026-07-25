@@ -2980,6 +2980,37 @@ function fitSiteGridTextControl(control,maxSize=160,minSize=5){
   mirror.remove();
   control.style.setProperty("font-size",best+"px","important");
 }
+function equalizePaintLauncherVisualRows(paintLines){
+  if(!paintToolButton||!paintLines.length||paintToolButton.clientHeight<8)return;
+  paintLines.forEach(line=>{
+    line.style.removeProperty("display");
+    line.style.removeProperty("height");
+    line.style.removeProperty("min-height");
+    line.style.removeProperty("flex");
+    line.style.removeProperty("line-height");
+  });
+  const visualLineCounts=paintLines.map(line=>{
+    const range=document.createRange();
+    range.selectNodeContents(line);
+    const tops=[];
+    [...range.getClientRects()].forEach(rect=>{
+      if(rect.width<1||rect.height<1)return;
+      if(!tops.some(top=>Math.abs(top-rect.top)<1))tops.push(rect.top);
+    });
+    range.detach?.();
+    return Math.max(1,tops.length);
+  });
+  const totalVisualRows=Math.max(1,visualLineCounts.reduce((sum,count)=>sum+count,0));
+  const visualRowHeight=paintToolButton.clientHeight/totalVisualRows;
+  paintLines.forEach((line,index)=>{
+    const lineHeight=visualRowHeight*visualLineCounts[index];
+    line.style.setProperty("display","block","important");
+    line.style.setProperty("height",lineHeight+"px","important");
+    line.style.setProperty("min-height","0","important");
+    line.style.setProperty("flex","0 0 "+lineHeight+"px","important");
+    line.style.setProperty("line-height",visualRowHeight+"px","important");
+  });
+}
 function fitSiteGridTextControls(){
   cancelAnimationFrame(siteGridTextFitFrame);
   siteGridTextFitFrame=requestAnimationFrame(()=>{
@@ -2991,6 +3022,7 @@ function fitSiteGridTextControls(){
       paintLines.forEach(line=>fitSiteGridTextControl(line,160,5));
       const commonPaintSize=Math.max(5,Math.min(...paintLines.map(line=>parseFloat(getComputedStyle(line).fontSize)||5)));
       paintLines.forEach(line=>line.style.setProperty("font-size",commonPaintSize+"px","important"));
+      equalizePaintLauncherVisualRows(paintLines);
     }else fitSiteGridTextControl(paintToolButton,160,5);
     fitSelectedLanguageText();
   });
