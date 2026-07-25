@@ -1,0 +1,177 @@
+{
+  "version": 3,
+  "updatedAt": 1785010200000,
+  "fontSize": 13,
+  "menuWidth": 220,
+  "language": "en",
+  "languageX": 0,
+  "languageY": 0,
+  "languageControlSize": 100,
+  "paintButtonX": 83.76068376068376,
+  "paintButtonY": 0,
+  "paintButtonSize": 100,
+  "enabledLanguages": [
+    "en",
+    "es",
+    "zh",
+    "hi",
+    "ar",
+    "fa",
+    "sw",
+    "am",
+    "ha",
+    "yo",
+    "zu"
+  ],
+  "links": [
+    {
+      "title": "DELIVERY MANAGER",
+      "url": "https://3y3jusvbs4t861dv.github.io/DELIVERY__MANAGER.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "DOOR TAG",
+      "url": "https://3y3jusvbs4t861dv.github.io/DOOR_TAG.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "FEDEX PHONE MENU",
+      "url": "https://3y3jusvbs4t861dv.github.io/FEDEX__PHONE__NUMBER__MENU.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "HOLD PACKAGE AT LOCATION",
+      "url": "https://3y3jusvbs4t861dv.github.io/HOLD__PACKAGE__AT__LOCATION.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "PHONE NUMBERS",
+      "url": "https://3y3jusvbs4t861dv.github.io/NUMBERS.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "PACKAGE DROP OFF",
+      "url": "https://3y3jusvbs4t861dv.github.io/PACKAGE__DROPOFF.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "PICKUPS",
+      "url": "https://3y3jusvbs4t861dv.github.io/PICKUP.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "ID & SIGNATURE",
+      "url": "https://3y3jusvbs4t861dv.github.io/SIGNATURE__AND__ID.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "SMALL BUSINESS SUPPORT NUMBER",
+      "url": "https://3y3jusvbs4t861dv.github.io/SMALL__BUSINESS__SALES__SUPPORT.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "TEMPORARY HOLD PACKAGE",
+      "url": "https://3y3jusvbs4t861dv.github.io/TEMPORARY__HOLD__PACKAGE.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "TRACKING AND MANAGING DELIVERIES",
+      "url": "https://3y3jusvbs4t861dv.github.io/TRACKING__&__MANAGING__DELIVERIES.pdf",
+      "type": "WEB",
+      "group": "Custom"
+    },
+    {
+      "title": "SMALL BUSINESS SUPPORT",
+      "url": "https://isell.my.site.com/s/schedule?language=en_US&PageSource=Small_bus_supp",
+      "type": "WEB",
+      "group": "Custom"
+    }
+  ],
+  "hiddenLinks": [],
+  "renames": {
+    "https://www.airnavradar.com/@37.75100,-97.82200,z5?airline=FDX": "FEDEX FLIGHTS",
+    "https://www.fedex.com/shippingplus/en-us/guest/pickup/schedule-pickup": "SCHEDULE PICKUP",
+    "https://3y3jusvbs4t861dv.github.io/NUMBERS.pdf": "PHONE NUMBERS",
+    "https://www.fedex.com/en-us/customer-support/faqs.html": "FAQS",
+    "https://3y3jusvbs4t861dv.github.io/SMALL__BUSINESS__SALES__SUPPORT.pdf": "SMALL BUSINESS SUPPORT NUMBER"
+  },
+  "layout": {},
+  "devCode": "0000",
+  "lastRemoteUpdatedAt": 0,
+  "paintButtonNames": {
+    "en": "WANT TO EXPLAIN DELIVERY INSTRUCTIONS DIFFERENTLY ?\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nDRAW ME A PICTURE"
+  },
+  "siteGridOrder": [
+    "paint-launcher",
+    "link-h3xfyo",
+    "link-1wo8mg1",
+    "link-lhp19n",
+    "link-l7ew50",
+    "link-mm6gri",
+    "link-1f20vib",
+    "link-144nyou",
+    "link-1l5qrqp",
+    "link-133qjql",
+    "link-pd4sad",
+    "link-ie755n",
+    "link-818upn",
+    "link-10k8xe5",
+    "link-1fg3g5f",
+    "link-6d7kpt",
+    "link-1x3snzl"
+  ],
+  "cubeSpans": {
+    "__paint_button__": {
+      "cols": 4,
+      "rows": 1
+    }
+  },
+  "layoutSchema": "device-profile-v1",
+  "deviceLayoutKey": "mobileLandscape",
+  "deviceLayout": {
+    "columns": 4,
+    "siteGridOrder": [
+      "paint-launcher",
+      "link-h3xfyo",
+      "link-1wo8mg1",
+      "link-lhp19n",
+      "link-l7ew50",
+      "link-mm6gri",
+      "link-1f20vib",
+      "link-144nyou",
+      "link-1l5qrqp",
+      "link-133qjql",
+      "link-pd4sad",
+      "link-ie755n",
+      "link-818upn",
+      "link-10k8xe5",
+      "link-1fg3g5f",
+      "link-6d7kpt",
+      "link-1x3snzl"
+    ],
+    "cubeSpans": {
+      "__paint_button__": {
+        "cols": 4,
+        "rows": 1
+      }
+    },
+    "updatedAt": 1785010200000,
+    "titleOverrides": {}
+  },
+  "devicePaintButtonNames": {
+    "mobileLandscape": {
+      "en": "WANT TO EXPLAIN DELIVERY INSTRUCTIONS DIFFERENTLY ?\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nDRAW ME A PICTURE"
+    }
+  },
+  "lastRemoteSignature": ""
+}
