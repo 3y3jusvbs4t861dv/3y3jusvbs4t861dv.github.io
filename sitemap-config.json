@@ -1,17 +1,32 @@
 {
   "version": 2,
-  "updatedAt": 1784905148310,
-  "lastRemoteUpdatedAt": 1784851899764,
-  "lastRemoteSignature": "2769:2dc8bc83",
+  "updatedAt": 1784945986796,
+  "lastRemoteUpdatedAt": 1784905148310,
+  "lastRemoteSignature": "1759:467084aa",
   "fontSize": 21,
-  "menuWidth": 180,
+  "menuWidth": 220,
   "language": "en",
   "languageX": 0,
   "languageY": 0,
-  "languageControlSize": 180,
-  "paintButtonX": 100,
-  "paintButtonY": 58.27814569536424,
-  "paintButtonSize": 200,
+  "languageControlSize": 100,
+  "paintButtonX": 0,
+  "paintButtonY": 0,
+  "paintButtonSize": 100,
+  "paintButtonNames": {
+    "en": "CAN'T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS ?\n────────────────\nDRAW ME A PICTURE"
+  },
+  "linkTitleTranslations": {
+    "es|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "¿No puede explicar las instrucciones de entrega con palabras? ──────────────── Dibujame un dibujo",
+    "zh|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "无法用文字解释交货说明？ ──────────────── 给我画一幅画",
+    "hi|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "वितरण निर्देशों को शब्दों से नहीं समझा सकते ? मुझे एक चित्र बनाओ",
+    "ar|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "لا يمكن شرح تعليمات التسليم بالكلمات؟ ارسم لي صورة",
+    "fa|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "آیا نمی توانید دستورالعمل های تحویل را با کلمات توضیح دهید؟\n────────────────\nبرای من یک عکس بکش",
+    "am|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "የማድረስ መመሪያዎችን በቃላት ማብራራት አልቻልኩም?\n───────────\nምስል ይሳሉኝ።",
+    "sw|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "HUWEZI KUELEZA MAAGIZO YA UTOAJI KWA MANENO ?\n───────────────\nNIVUTE PICHA",
+    "ha|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "BA ZA A IYA BAYANIN UMARNIN ISAR DA KALMOMI BA?\n──────────────\nZAN MIN HOTO",
+    "yo|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "NJE KO LE ṢAlaye Ilana Ifijiṣẹ PẸLU ỌRỌ?\n────────────\nYA MI Aworan",
+    "zu|CAN T EXPLAIN DELIVERY INSTRUCTIONS WITH WORDS DRAW ME A PICTURE": "AWUKWAZI UKUCHAZA IMIYALELO YOKULETHWA NGAMAGAMA ?\n───────────────\nNGIKE NGINGEKE ISITHOMBE"
+  },
   "enabledLanguages": [
     "en",
     "es",
@@ -60,127 +75,30 @@
     "https://www.fedex.com/shippingplus/en-us/guest/pickup/schedule-pickup": "SCHEDULE PICKUP",
     "https://www.fedex.com/en-us/customer-support/faqs.html": "FAQS"
   },
-  "layout": {
-    "link-131rc7e": {
-      "x": 0,
-      "y": 400,
-      "w": 192
-    },
-    "link-1mwo08i": {
-      "x": 200,
-      "y": 400,
-      "w": 192
-    },
-    "link-1puwz9h": {
-      "x": 400,
-      "y": 400,
-      "w": 192
-    },
-    "link-5oxcq3": {
-      "x": 608,
-      "y": 400,
-      "w": 192
-    },
-    "link-1ff0p70": {
-      "x": 808,
-      "y": 400,
-      "w": 192
-    },
-    "link-esf4mf": {
-      "x": 1008,
-      "y": 400,
-      "w": 192
-    },
-    "link-1ix3vkm": {
-      "x": 1208,
-      "y": 400,
-      "w": 192
-    },
-    "link-1h5jqgo": {
-      "x": 0,
-      "y": 496,
-      "w": 192
-    },
-    "link-6d7kpt": {
-      "x": 208,
-      "y": 352,
-      "w": 192
-    },
-    "link-133qjql": {
-      "x": 208,
-      "y": 272,
-      "w": 192
-    },
-    "link-818upn": {
-      "x": 0,
-      "y": 488,
-      "w": 192
-    },
-    "link-1x3snzl": {
-      "x": 0,
-      "y": 408,
-      "w": 192
-    },
-    "link-mm6gri": {
-      "x": 200,
-      "y": 456,
-      "w": 192
-    },
-    "link-1l5qrqp": {
-      "x": 40,
-      "y": 104,
-      "w": 192
-    },
-    "link-pd4sad": {
-      "x": 408,
-      "y": 376,
-      "w": 192
-    },
-    "link-l7ew50": {
-      "x": 416,
-      "y": 288,
-      "w": 192
-    },
-    "link-h3xfyo": {
-      "x": 24,
-      "y": 216,
-      "w": 192
-    },
-    "link-lhp19n": {
-      "x": 464,
-      "y": 200,
-      "w": 192
-    },
-    "link-144nyou": {
-      "x": 432,
-      "y": 80,
-      "w": 192
-    },
-    "link-1wo8mg1": {
-      "x": 240,
-      "y": 184,
-      "w": 192
-    },
-    "link-1f20vib": {
-      "x": 0,
-      "y": 328,
-      "w": 192
-    },
-    "link-10k8xe5": {
-      "x": 656,
-      "y": 496,
-      "w": 192
-    },
-    "link-ie755n": {
-      "x": 240,
-      "y": 600,
-      "w": 192
-    },
-    "link-1fg3g5f": {
-      "x": 408,
-      "y": 480,
-      "w": 192
-    }
-  },
+  "layout": {},
+  "siteGridOrder": [
+    "language-panel",
+    "request-language-button",
+    "paint-launcher",
+    "link-1wo8mg1",
+    "link-h3xfyo",
+    "link-1x3snzl",
+    "link-1f20vib",
+    "link-818upn",
+    "link-l7ew50",
+    "link-mm6gri",
+    "link-ie755n",
+    "link-133qjql",
+    "link-1l5qrqp",
+    "link-144nyou",
+    "link-lhp19n",
+    "link-pd4sad",
+    "link-10k8xe5",
+    "link-1fg3g5f",
+    "link-6d7kpt",
+    "empty-cube-1"
+  ],
+  "textNumber": "+19165000214",
+  "cubeSpans": {},
   "devCode": "0000"
 }
