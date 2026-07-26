@@ -1494,6 +1494,9 @@ function fitPaintToolbar(){
       if(label)label.style.removeProperty("font-size");
     });
     if(fittedControls.length)fittedControls[0].style.gridColumn="1/-1";
+    if(bestColumns===3&&fittedControls.length>1){
+      fittedControls[fittedControls.length-1].style.gridColumn="1/-1";
+    }
     fittedControls.forEach(fitPaintControlText);
   });
 }
