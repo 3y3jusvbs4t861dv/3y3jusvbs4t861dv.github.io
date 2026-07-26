@@ -44,13 +44,15 @@ html.paint-editor-open,body.paint-editor-open{overflow:hidden!important;overscro
 .paint-modal.open{display:block}
 .paint-box{position:relative;width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;background:#01cc00}
 .paint-workspace{--paint-tools-px:420px;position:absolute;inset:0;display:grid;grid-template-columns:var(--paint-tools-px) 20px minmax(0,1fr);width:100%;height:100%;min-width:0;min-height:0;overflow:hidden}
-.paint-tools-area{position:relative;display:block;min-width:0;min-height:0;overflow:hidden;background:#ff6600}
-.paint-mobile-close{position:absolute;top:-16px;left:-16px;z-index:80;display:flex;width:56px;height:56px;min-width:56px;min-height:56px;align-items:center;justify-content:center;padding:0;border:0;outline:0;box-shadow:none;color:#660099;background:transparent;font:900 40px/1 Arial,Helvetica,sans-serif;cursor:pointer}
-.paint-toolbar{position:absolute;inset:0;min-width:0;min-height:0;overflow:hidden;overscroll-behavior:contain;background:#ff6600}
+.paint-tools-area{position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:var(--paint-top-action-height,56px) minmax(0,1fr);gap:4px;min-width:0;min-height:0;overflow:hidden;background:#660099}
+.paint-top-actions{grid-column:1;grid-row:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px;width:100%;height:100%;min-width:0;min-height:0;background:#660099;overflow:hidden}
+.paint-mobile-close{position:relative;top:auto;left:auto;z-index:1;display:flex;width:100%;height:100%;min-width:0;min-height:0;align-items:center;justify-content:center;padding:3px 4px;border:0;outline:0;box-shadow:none;color:#660099;background:#ff6600;font:900 var(--paint-control-font-size,15px)/.94 Arial,Helvetica,sans-serif;text-align:center;white-space:normal;overflow:hidden;cursor:pointer;touch-action:manipulation}
+.paint-top-actions .paint-tool-button{width:100%;height:100%;min-width:0;min-height:0;cursor:pointer;touch-action:manipulation}
+.paint-toolbar{position:relative;inset:auto;grid-column:1;grid-row:2;min-width:0;min-height:0;overflow:hidden;overscroll-behavior:contain;background:#ff6600}
 .paint-toolbar::-webkit-scrollbar{width:8px;height:8px}
 .paint-toolbar::-webkit-scrollbar-track{background:#ff6600}
 .paint-toolbar::-webkit-scrollbar-thumb{background:#660099;border-radius:0}
-.paint-tool-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));align-content:stretch;width:100%;height:100%;min-width:0;min-height:0;gap:4px;padding:0;overflow:hidden;background:#660099}.paint-tool-grid>:first-child{justify-content:flex-end;text-align:right;padding-right:8px}.paint-tool-grid>:first-child .paint-tool-word,.paint-tool-grid>:first-child .paint-tool-field-label{justify-content:flex-end;text-align:right}
+.paint-tool-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));align-content:stretch;width:100%;height:100%;min-width:0;min-height:0;gap:4px;padding:0;overflow:hidden;background:#660099}
 .paint-tool-button,.paint-tool-select,.paint-tool-field{display:flex;min-width:0;min-height:0;align-items:center;justify-content:center;align-content:center;flex-direction:row;flex-wrap:wrap;column-gap:.24em;row-gap:0;margin:0;padding:3px 4px;border:0;border-radius:0;outline:0;box-shadow:none;color:#660099;background:#ff6600;background-clip:padding-box;font:900 var(--paint-control-font-size,15px)/.94 Arial,Helvetica,sans-serif;text-align:center;white-space:normal;overflow:hidden;overflow-wrap:normal;word-break:keep-all;hyphens:none;cursor:grab;user-select:none;touch-action:none}
 .paint-tool-button:active,.paint-tool-select:active,.paint-tool-field:active{cursor:grabbing}
 .paint-tool-word,.paint-tool-word{display:inline-block;min-width:0;line-height:.94;text-align:center;white-space:nowrap}
@@ -91,7 +93,6 @@ html.paint-editor-open,body.paint-editor-open{overflow:hidden!important;overscro
   .paint-tools-area{grid-column:1;grid-row:1}
   .paint-split-divider{grid-column:2;grid-row:1}
   .paint-canvas-column{grid-column:3;grid-row:1}
-  .paint-mobile-close{top:-16px;left:-16px}
 }
 @media(max-width:820px) and (orientation:portrait){
   .paint-workspace{grid-template-columns:1fr;grid-template-rows:var(--paint-tools-px) 40px minmax(0,1fr)}
@@ -202,11 +203,11 @@ html.paint-editor-open,body.paint-editor-open{overflow:hidden!important;overscro
 </div>
 <div aria-label="Paint editor" aria-modal="true" class="paint-modal" id="paintModal" role="dialog">
 <div class="paint-box" id="paintBox">
-<button aria-label="Close paint editor" class="paint-mobile-close" id="paintMobileCloseButton" type="button">×</button>
 <div class="paint-workspace" id="paintWorkspace">
 <div class="paint-tools-area" id="paintToolsArea">
+<div class="paint-top-actions" id="paintTopActions"><button aria-label="Close paint editor" class="paint-mobile-close" id="paintMobileCloseButton" type="button"><span class="paint-tool-word">CLOSE</span></button><button class="paint-tool-button" id="paintTextButton" type="button"><span class="paint-tool-word">SEND</span><span class="paint-tool-word">TEXT</span></button></div>
 <div class="paint-toolbar" id="paintToolbar">
-<div class="paint-tool-grid" id="paintToolbarGroups"><button class="paint-tool-button" id="paintSelectButton" type="button"><span class="paint-tool-word">SELECT</span></button><button class="paint-tool-button" id="paintDrawButton" type="button"><span class="paint-tool-word">DRAW</span></button><button class="paint-tool-button" id="paintEraserButton" type="button"><span class="paint-tool-word">ERASER</span></button><button class="paint-tool-button" id="paintFillButton" type="button"><span class="paint-tool-word">FILL</span></button><button class="paint-tool-button" id="paintAddImageButton" type="button"><span class="paint-tool-word">ADD</span><span class="paint-tool-word">IMAGE</span></button><button class="paint-tool-button" id="paintLineButton" type="button"><span class="paint-tool-word">ADD</span><span class="paint-tool-word">LINE</span><span class="paint-tool-word">SHAPE</span></button><label class="paint-tool-field paint-tool-color paint-tool-button paint-color-square-control"><span class="paint-tool-field-label"><span>COLOR</span></span><span class="paint-color-preview" id="paintColorPreview"><input id="paintColorInput" type="color" value="#000000"/></span></label><label class="paint-tool-field paint-tool-button paint-brush-square-control"><span class="paint-tool-field-label"><span>BRUSH</span></span><input id="paintSizeInput" max="60" min="1" step="1" type="range" value="8"/></label><button class="paint-tool-button" id="paintUndoButton" type="button"><span class="paint-tool-word">UNDO</span></button><button class="paint-tool-button" id="paintRedoButton" type="button"><span class="paint-tool-word">REDO</span></button><button class="paint-tool-button" id="paintCopyButton" type="button"><span class="paint-tool-word">COPY</span></button><button class="paint-tool-button" id="paintPasteButton" type="button"><span class="paint-tool-word">PASTE</span></button><button class="paint-tool-button" id="paintClipboardButton" type="button"><span class="paint-tool-word">CLIPBOARD</span></button><button class="paint-tool-button" id="paintDeleteButton" type="button"><span class="paint-tool-word">DELETE</span></button><button class="paint-tool-button" id="paintClearButton" type="button"><span class="paint-tool-word">CLEAR</span></button><button class="paint-tool-button" id="paintAddTextButton" type="button"><span class="paint-tool-word">ADD</span><span class="paint-tool-word">TEXT</span></button><button class="paint-tool-button" id="paintTextButton" type="button"><span class="paint-tool-word">SEND</span><span class="paint-tool-word">TEXT</span></button></div><input aria-hidden="true" aria-label="Text size" hidden="" id="paintTextSizeInput" max="240" min="8" step="1" type="range" value="13"/>
+<div class="paint-tool-grid" id="paintToolbarGroups"><button class="paint-tool-button" id="paintSelectButton" type="button"><span class="paint-tool-word">SELECT</span></button><button class="paint-tool-button" id="paintDrawButton" type="button"><span class="paint-tool-word">DRAW</span></button><button class="paint-tool-button" id="paintEraserButton" type="button"><span class="paint-tool-word">ERASER</span></button><button class="paint-tool-button" id="paintFillButton" type="button"><span class="paint-tool-word">FILL</span></button><button class="paint-tool-button" id="paintAddImageButton" type="button"><span class="paint-tool-word">ADD</span><span class="paint-tool-word">IMAGE</span></button><button class="paint-tool-button" id="paintLineButton" type="button"><span class="paint-tool-word">ADD</span><span class="paint-tool-word">LINE</span><span class="paint-tool-word">SHAPE</span></button><label class="paint-tool-field paint-tool-color paint-tool-button paint-color-square-control"><span class="paint-tool-field-label"><span>COLOR</span></span><span class="paint-color-preview" id="paintColorPreview"><input id="paintColorInput" type="color" value="#000000"/></span></label><label class="paint-tool-field paint-tool-button paint-brush-square-control"><span class="paint-tool-field-label"><span>BRUSH</span></span><input id="paintSizeInput" max="60" min="1" step="1" type="range" value="8"/></label><button class="paint-tool-button" id="paintUndoButton" type="button"><span class="paint-tool-word">UNDO</span></button><button class="paint-tool-button" id="paintRedoButton" type="button"><span class="paint-tool-word">REDO</span></button><button class="paint-tool-button" id="paintCopyButton" type="button"><span class="paint-tool-word">COPY</span></button><button class="paint-tool-button" id="paintPasteButton" type="button"><span class="paint-tool-word">PASTE</span></button><button class="paint-tool-button" id="paintClipboardButton" type="button"><span class="paint-tool-word">CLIPBOARD</span></button><button class="paint-tool-button" id="paintDeleteButton" type="button"><span class="paint-tool-word">DELETE</span></button><button class="paint-tool-button" id="paintClearButton" type="button"><span class="paint-tool-word">CLEAR</span></button><button class="paint-tool-button" id="paintAddTextButton" type="button"><span class="paint-tool-word">ADD</span><span class="paint-tool-word">TEXT</span></button></div><input aria-hidden="true" aria-label="Text size" hidden="" id="paintTextSizeInput" max="240" min="8" step="1" type="range" value="13"/>
 </div>
 </div>
 <div aria-label="Resize tool panel and canvas" aria-orientation="vertical" class="paint-split-divider" id="paintSplitDivider" role="separator" tabindex="0"></div>
@@ -1460,26 +1461,26 @@ function fitPaintToolbar(){
   cancelAnimationFrame(paintToolbarFitFrame);
   paintToolbarFitFrame=requestAnimationFrame(()=>{
     paintToolbarFitFrame=0;
-    if(!paintToolbarGroups||!paintToolbar)return;
+    if(!paintToolbarGroups||!paintToolbar||!paintToolsArea)return;
     const controls=paintToolControls();
     const count=controls.length;
-    const width=paintToolbar.clientWidth;
-    const height=paintToolbar.clientHeight;
+    const width=paintToolsArea.clientWidth;
+    const height=paintToolsArea.clientHeight;
     if(!count||width<20||height<20)return;
     const gap=4;
-    const regularCount=Math.max(0,count-1);
-    const longestWord=Math.max(1,...controls.flatMap(control=>
+    const sizingControls=[paintMobileCloseButton,paintTextButton,...controls].filter(Boolean);
+    const longestWord=Math.max(1,...sizingControls.flatMap(control=>
       [...control.querySelectorAll(".paint-tool-word,.paint-tool-field-label span")]
         .map(node=>String(node.textContent||"").trim().length)
     ));
     let bestColumns=1;
     let bestScore=-Infinity;
-    const maximumColumns=Math.min(Math.max(1,regularCount),8);
+    const maximumColumns=Math.min(Math.max(1,count),8);
     for(let columns=1;columns<=maximumColumns;columns++){
-      const regularRows=Math.max(1,Math.ceil(regularCount/columns));
-      const rows=regularRows+1;
+      const rows=Math.max(1,Math.ceil(count/columns));
+      const totalRows=rows+1;
       const cellWidth=(width-gap*(columns-1))/columns;
-      const cellHeight=(height-gap*(rows-1))/rows;
+      const cellHeight=(height-gap*rows)/totalRows;
       if(cellWidth<24||cellHeight<20)continue;
       const estimatedFont=Math.min(cellHeight*.74,cellWidth/(Math.max(4,longestWord)*.56));
       const balancePenalty=Math.abs((cellWidth/cellHeight)-1.55)*.05;
@@ -1495,8 +1496,9 @@ function fitPaintToolbar(){
       paintDrawButton.classList.toggle("paint-three-column-draw",portraitThreeColumns);
     }
     const fittedControls=paintToolControls();
-    const regularRows=Math.max(1,Math.ceil(Math.max(0,fittedControls.length-1)/bestColumns));
-    const rows=regularRows+1;
+    const rows=Math.max(1,Math.ceil(fittedControls.length/bestColumns));
+    const topActionHeight=Math.max(20,(height-gap*rows)/(rows+1));
+    paintToolsArea.style.setProperty("--paint-top-action-height",topActionHeight+"px");
     paintToolbarGroups.style.gridTemplateColumns=`repeat(${bestColumns},minmax(0,1fr))`;
     paintToolbarGroups.style.gridTemplateRows=`repeat(${rows},minmax(0,1fr))`;
     fittedControls.forEach(control=>{
@@ -1505,10 +1507,11 @@ function fitPaintToolbar(){
       const label=control.querySelector(".paint-tool-field-label");
       if(label)label.style.removeProperty("font-size");
     });
-    if(fittedControls.length)fittedControls[0].style.gridColumn="1/-1";
-    if(bestColumns===3&&fittedControls.length>1){
-      fittedControls[fittedControls.length-1].style.gridColumn="1/-1";
-    }
+    [paintMobileCloseButton,paintTextButton].forEach(control=>{
+      if(!control)return;
+      control.style.removeProperty("--paint-control-font-size");
+      fitPaintControlText(control);
+    });
     fittedControls.forEach(fitPaintControlText);
   });
 }
