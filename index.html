@@ -4191,16 +4191,22 @@ function englishTitleForLink(item,renames=renameMap()){
   return "";
 }
 
+const FEDEX_FAQS_URL="https://www.fedex.com/en-us/customer-support/faqs.html";
+
 function englishLinks(){
   const renames=renameMap();
   const hidden=new Set(hiddenLinks.map(String));
   return mergedLinkRecords()
     .filter(item=>!hidden.has(String(item.url)))
-    .map(item=>({
-      ...item,
-      title:englishTitleForLink(item,renames).toLocaleUpperCase("en-US"),
-      direction:"ltr"
-    }));
+    .map(item=>{
+      const url=String(item.url||"");
+      const title=englishTitleForLink(item,renames);
+      return{
+        ...item,
+        title:url===FEDEX_FAQS_URL?"FAQs":title.toLocaleUpperCase("en-US"),
+        direction:"ltr"
+      };
+    });
 }
 
 function links(){
@@ -4209,9 +4215,12 @@ function links(){
     const translated=language==="en"
       ?englishTitle
       :translatedEditedLinkTitle(englishTitle,item,language);
+    const displayTitle=String(translated||englishTitle);
     return{
       ...item,
-      title:String(translated||englishTitle).toLocaleUpperCase(language),
+      title:language==="en"&&String(item.url||"")===FEDEX_FAQS_URL
+        ?"FAQs"
+        :displayTitle.toLocaleUpperCase(language),
       direction:RTL_LANGUAGES.has(language)?"rtl":"ltr"
     };
   });
