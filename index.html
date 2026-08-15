@@ -165,8 +165,8 @@ html.paint-editor-open,body.paint-editor-open{overflow:hidden!important;overscro
 <div class="language-request-box">
 <input autocomplete="off" class="language-request-input" id="requestedLanguageInput" placeholder="LANGUAGE" type="text"/>
 <button class="language-request-send" id="sendLanguageRequestButton" type="button">SEND REQUEST</button>
-<div aria-label="QR code for texting 916 500 0214" class="language-request-qr-square"><canvas aria-label="QR code for texting 916 500 0214" class="language-request-qr-canvas" id="languageRequestQrCanvas" role="img"></canvas><img alt="" aria-hidden="true" class="language-request-qr-source" id="languageRequestQrImage"/></div>
-<div class="language-request-qr-note">916 500 0214</div>
+<div aria-label="QR code for texting 209 554 8474" class="language-request-qr-square"><canvas aria-label="QR code for texting 209 554 8474" class="language-request-qr-canvas" id="languageRequestQrCanvas" role="img"></canvas><img alt="" aria-hidden="true" class="language-request-qr-source" id="languageRequestQrImage"/></div>
+<div class="language-request-qr-note">209 554 8474</div>
 </div>
 </div>
 <div aria-label="Add cube" aria-modal="true" class="add-link-modal" id="addLinkModal" role="dialog">
@@ -734,7 +734,8 @@ const LEGACY_CFG_KEY="TEXT_SITEMAP_CFG_V2";
 const LEGACY_FONT_SIZE_KEY="sitemapFontSizeV1";
 const LEGACY_RENAME_KEY="sitemapRenameOverridesV1";
 const DEFAULT_DEV_CODE="0000";
-const DEFAULT_TEXT_NUMBER="+19165000214";
+const LEGACY_DEFAULT_TEXT_NUMBER="+19165000214";
+const DEFAULT_TEXT_NUMBER="+12095548474";
 const DEFAULT_PAINT_LAUNCH_LABEL="WANT TO EXPLAIN DELIVERY INSTRUCTIONS DIFFERENTLY ?\nDRAW ME A PICTURE";
 const DEFAULT_DEVICE_PAINT_BUTTON_NAMES={
   desktop:{en:"WANT TO EXPLAIN DELIVERY INSTRUCTIONS DIFFERENTLY ?~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nDRAW ME A PICTURE"},
@@ -998,7 +999,7 @@ function normalizeCfg(value){
     layout:{},
     deviceLayouts:normalizeDeviceLayouts(value.deviceLayouts,value.siteGridOrder,value.cubeSpans),
     siteGridOrder:Array.isArray(value.siteGridOrder)?value.siteGridOrder.map(String):[],
-    textNumber:normalizeTextNumber(value.textNumber)||DEFAULT_TEXT_NUMBER,
+    textNumber:(()=>{const n=normalizeTextNumber(value.textNumber);return !n||n===LEGACY_DEFAULT_TEXT_NUMBER?DEFAULT_TEXT_NUMBER:n;})(),
     cubeSpans:normalizeCubeSpans(value.cubeSpans),
     devCode:/^\d{4}$/.test(String(value.devCode||""))
       ?String(value.devCode)
