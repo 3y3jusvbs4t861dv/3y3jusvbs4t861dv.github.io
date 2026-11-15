@@ -1,0 +1,9 @@
+# Prevent server code and deployment configuration from becoming public website files.
+worker/**
+wrangler.jsonc
+.assetsignore
+.github/**
+.git/**
+.env*
+.dev.vars*
+node_modules/**
