@@ -1,0 +1,17 @@
+
+{
+  "name": "3y3jusvbs4t861dv-github-io",
+  "compatibility_date": "2026-11-15",
+  "assets": {
+    "directory": "."
+  },
+  "kv_namespaces": [
+    {
+      "binding": "MY_KV",
+      "id": "c03a3c02baf440eea5a3650a1580a0ee"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
