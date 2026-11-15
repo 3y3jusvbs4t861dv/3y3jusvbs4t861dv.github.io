@@ -126,6 +126,9 @@ html.paint-editor-open,body.paint-editor-open{overflow:hidden!important;overscro
 
 
 .open-link[href="https://www.fedex.com/en-us/customer-support/faqs.html"]{text-transform:none!important}
+
+/* The developer-menu labels intentionally keep their exact capitalization. */
+.tool-menu > button { text-transform: none !important; }
 </style>
 </head>
 <body>
@@ -140,23 +143,23 @@ html.paint-editor-open,body.paint-editor-open{overflow:hidden!important;overscro
 <input aria-label="Enter four digit code" autocomplete="off" class="dev-code-input" id="devCodeInput" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="password"/>
 </div>
 <div class="tool-menu" id="toolMenu">
-<button class="export-button" id="editLinkButton" type="button">EDIT CUBES</button>
+<button class="export-button" id="exportConfigButton" type="button">export</button>
 <div class="tool-divider"></div>
-<button class="export-button" id="addLinkButton" type="button">ADD CUBES</button>
+<button class="export-button" id="changeCodeButton" type="button">change code</button>
 <div class="tool-divider"></div>
-<button class="export-button" id="exportConfigButton" type="button">EXPORT</button>
+<button class="drag-toggle" id="dragToggleButton" type="button">drag</button>
 <div class="tool-divider"></div>
-<button class="export-button" id="cloudConnectButton" type="button">CLOUD CONNECT</button>
+<button class="export-button" id="editLinkButton" type="button">edit cube</button>
 <div class="tool-divider"></div>
-<button class="export-button" id="cloudPullButton" type="button">CLOUD LOAD</button>
+<button class="export-button" id="addLinkButton" type="button">add cube</button>
 <div class="tool-divider"></div>
-<button class="drag-toggle" id="dragToggleButton" type="button">DRAG</button>
+<button class="export-button" id="changeNumberButton" type="button">change #</button>
 <div class="tool-divider"></div>
-<button class="export-button" id="changeNumberButton" type="button">CHANGE NUMBER</button>
+<button class="export-button" id="cloudPullButton" type="button">cloud load</button>
 <div class="tool-divider"></div>
-<button class="export-button" id="changeCodeButton" type="button">CHANGE CODE</button>
+<button class="export-button" id="cloudConnectButton" type="button">cloud connect</button>
 <div class="tool-divider"></div>
-<button aria-label="Close developer menu" class="dev-menu-close-button" id="devMenuCloseButton" type="button">×</button>
+<button aria-label="Close developer menu" class="dev-menu-close-button" id="devMenuCloseButton" type="button">X</button>
 </div>
 </div>
 <section class="grid" id="grid"></section>
@@ -3042,7 +3045,7 @@ function setDevUnlocked(unlocked,showMessage=false){
     finishSiteGridDrag();
     layoutCanvas.classList.remove("drag-mode");
     dragToggleButton.classList.remove("active");
-    dragToggleButton.textContent="DRAG";
+    dragToggleButton.textContent="drag";
     devCodeInput.readOnly=false;
     devCodeInput.value="";
     devCodeInput.placeholder="";
@@ -3563,7 +3566,7 @@ function setDragMode(enabled){
   }
   layoutCanvas.classList.toggle("drag-mode",dragEnabled);
   dragToggleButton.classList.toggle("active",dragEnabled);
-  dragToggleButton.textContent=dragEnabled?"DONE":"DRAG";
+  dragToggleButton.textContent=dragEnabled?"done":"drag";
   showToast(dragEnabled?"DRAG ON":"SAVED");
 }
 
